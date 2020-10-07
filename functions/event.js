@@ -43,7 +43,7 @@ exports.handler = function (event, context, callback) {
             event
                 .save()
                 .then((res) => {
-                    console.log(response);
+                    console.log(res);
                 })
                 .catch((err) => {
                     console.log(err);
