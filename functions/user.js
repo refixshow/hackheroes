@@ -2,35 +2,39 @@
 const connectToDatabase = require('../lib/database');
 const saveInDatabase = require('../lib/saveInDatabase');
 // Model import
-let Event = require('../models/event');
+let User = require('../models/user');
 
 exports.handler = async function (event, context, callback) {
     if (event.httpMethod === 'GET') {
+        // GET method handler
         const db = await connectToDatabase();
-        const events = (await Event.find({})).toString();
+        const users = (await User.find({})).toString();
 
         callback(null, {
             statusCode: 200,
-            body: events,
+            body: users,
         });
     } else if (event.httpMethod === 'POST') {
+        // POST method handler
         const db = await connectToDatabase();
 
-        const { title, author, description, date, location } = JSON.parse(event.body);
+        const { username, email, password, firstName, lastName, gender, birthDate, location } = JSON.parse(event.body);
 
-        const newEvent = new Event({
-            title,
-            author,
-            description,
-            date,
+        const newUser = new User({
+            username,
+            email,
+            password,
+            firstName,
+            lastName,
+            gender,
+            birthDate,
             location,
-            comments: [],
             meta: {
-                interested: 0,
-                enrolled: 0,
+                sports: [],
+                enrolledEvents: [],
             },
         });
-        saveInDatabase(newEvent);
+        saveInDatabase(newUser);
 
         callback(null, {
             statusCode: 200,
