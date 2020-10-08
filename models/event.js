@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 // Event Schema
 const eventSchema = new Schema({
     title: String,
-    author: String, // ID of author
+    author: String,
     description: String,
     comments: [
         {

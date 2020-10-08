@@ -1,71 +1,42 @@
-const mongoose = require('mongoose');
-
-// DB connection
-mongoose
-    .connect('mongodb://localhost/hackheroes', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
+// Imports
+const connectToDatabase = require('../lib/database');
+const saveInDatabase = require('../lib/saveInDatabase');
 // Models
 let Event = require('../models/event');
 
-exports.handler = function (event, context, callback) {
-    switch (event.httpMethod) {
-        case 'GET':
-            // Get event
-            Event.find({})
-                .then((events) => {
-                    callback(null, {
-                        statusCode: 200,
-                        body: 'GET',
-                        events,
-                    });
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-            break;
-        case 'POST':
-            // Add event
-            let { title, author, description } = JSON.parse(event.body);
-            const event = new Event({
-                title,
-                author,
-                description,
-            });
-            event
-                .save()
-                .then((res) => {
-                    console.log(res);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-            callback(null, {
-                statusCode: 200,
-                body: 'POST',
-            });
-            break;
-        case 'DELETE':
-            // Delete event
-            callback(null, {
-                statusCode: 200,
-                body: 'DELETE',
-            });
-            break;
-        case 'PATCH':
-            // Update event
-            callback(null, {
-                statusCode: 200,
-                body: 'PATCH',
-            });
-            break;
+exports.handler = async function (event, context, callback) {
+    if (event.httpMethod === 'GET') {
+        const db = await connectToDatabase();
+
+        const events = (await Event.find({})).toString();
+
+        callback(null, {
+            statusCode: 200,
+            body: events,
+        });
+    } else if (event.httpMethod === 'POST') {
+        const db = await connectToDatabase();
+
+        const { title, author, description, date } = JSON.parse(event.body);
+
+        const newEvent = new Event({
+            title,
+            author,
+            description,
+            date,
+            comments: [],
+            meta: {
+                interested: 0,
+                enrolled: 0,
+            },
+        });
+        saveInDatabase(newEvent);
+
+        callback(null, {
+            statusCode: 200,
+            body: 'POST',
+        });
+    } else if ((event.httpMethod = 'DELETE')) {
+    } else if ((event.httpMethod = 'PATCH')) {
     }
 };
