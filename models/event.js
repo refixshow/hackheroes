@@ -6,6 +6,8 @@ const eventSchema = new Schema({
     title: String,
     author: String,
     description: String,
+    date: Date,
+    location: String,
     comments: [
         {
             body: String,
@@ -15,7 +17,6 @@ const eventSchema = new Schema({
             },
         },
     ],
-    date: Date,
     meta: {
         interested: Number,
         enrolled: Number,

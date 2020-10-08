@@ -17,13 +17,14 @@ exports.handler = async function (event, context, callback) {
     } else if (event.httpMethod === 'POST') {
         const db = await connectToDatabase();
 
-        const { title, author, description, date } = JSON.parse(event.body);
+        const { title, author, description, date, location } = JSON.parse(event.body);
 
         const newEvent = new Event({
             title,
             author,
             description,
             date,
+            location,
             comments: [],
             meta: {
                 interested: 0,
