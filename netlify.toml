@@ -1,4 +1,10 @@
 [dev]
 	functions = "server/functions/"
+	
 [build]
 	functions = "server/functions/"
+
+[[redirects]]
+	from = "/*"
+	to = "/index.html"
+	status = 200

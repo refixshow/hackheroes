@@ -3,6 +3,8 @@ exports.handler = async (event, context, callback) => {
 
   console.log("USER FROM NETLIFY", user)
 
+  // without login it doesnt show 'user' in object response
+
   callback(null, {
     statusCode: 200,
     body: "OK",
