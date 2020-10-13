@@ -20,6 +20,7 @@ const Login = () => {
         onLogout={() => console.log("bye ")}
       />
       <button onClick={() => setDialog(true)}>log in</button>
+      aaa
     </div>
   )
 }
