@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reach/dialog": "^0.11.2",
+    "@reach/tabs": "^0.11.2",
+    "@reach/visually-hidden": "^0.11.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -10,6 +13,8 @@
     "mongoose": "^5.10.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-netlify-identity": "^0.2.5",
+    "react-netlify-identity-widget": "^0.2.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3"
   },
