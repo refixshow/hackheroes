@@ -1,6 +1,9 @@
-import React, { useReducer } from "react"
-import AppContext, { initialstate } from "./AppContext"
+import React, { useReducer, createContext } from "react"
 import reducer from "../reducers/AppReducer"
+
+const initialstate = {}
+
+export const AppContext = createContext({})
 
 const AppContextProvider = ({ children }) => {
   const [state, dispach] = useReducer(reducer, initialstate)

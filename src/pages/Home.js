@@ -1,26 +1,33 @@
-import React, { useContext } from "react"
-import { Redirect } from "react-router-dom"
+import React, { useContext, useCallback } from "react"
+import { useHistory } from "react-router-dom"
 import { IdentityModalContext } from "../context/IdentityModalContextProvider"
-import {
-  IdentityModal,
-  useIdentityContext,
-} from "react-netlify-identity-widget"
-import "react-netlify-identity-widget/styles.css"
-import "@reach/tabs/styles.css"
+import { IdentityModal } from "react-netlify-identity-widget"
 
 const Home = () => {
   const { isOpen, setIsOpen } = useContext(IdentityModalContext)
-  const { isLoggedIn } = useIdentityContext()
+  const history = useHistory()
+
+  const handleOnClick = useCallback(() => {
+    setIsOpen(true)
+  }, [setIsOpen])
+
+  const handleOnCloseDialog = useCallback(() => {
+    setIsOpen(false)
+  }, [setIsOpen])
+
+  const handleOnLogin = useCallback(() => {
+    history.push("/activity")
+  }, [])
 
   return (
     <div>
       Home Page
       <IdentityModal
         showDialog={isOpen}
-        onCloseDialog={() => setIsOpen(false)}
+        onCloseDialog={handleOnCloseDialog}
+        onLogin={handleOnLogin}
       />
-      <button onClick={() => setIsOpen(true)}>Log In</button>
-      {isLoggedIn ? <Redirect to="/activity" /> : null}
+      <button onClick={handleOnClick}>Log In</button>
     </div>
   )
 }

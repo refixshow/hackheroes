@@ -6,6 +6,9 @@ import AppContextProvider from "./context/AppContextProvider"
 import IdentityModalContextProvider from "./context/IdentityModalContextProvider"
 import { Home, Error } from "./pages"
 
+import "react-netlify-identity-widget/styles.css"
+import "@reach/tabs/styles.css"
+
 const App = () => {
   const url = process.env.REACT_APP_NETLIFY_IDENTITY_URL
   return (
