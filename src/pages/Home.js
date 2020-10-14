@@ -17,7 +17,7 @@ const Home = () => {
 
   const handleOnLogin = useCallback(() => {
     history.push("/activity")
-  }, [])
+  }, [history])
 
   return (
     <div>
