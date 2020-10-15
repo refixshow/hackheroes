@@ -4,7 +4,9 @@ import PrivateRoute from "./components/PrivateRoute"
 import { IdentityContextProvider } from "react-netlify-identity-widget"
 import AppContextProvider from "./context/AppContextProvider"
 import IdentityModalContextProvider from "./context/IdentityModalContextProvider"
+import IdentityModalComponent from "./components/IdentityModalComponent"
 import { Home, Activities, BMI, Error } from "./pages"
+import { queryCache } from "react-query"
 
 import "react-netlify-identity-widget/styles.css"
 import "@reach/tabs/styles.css"
@@ -17,8 +19,16 @@ const App = () => {
         <AppContextProvider>
           <IdentityModalContextProvider>
             <Router>
+              <IdentityModalComponent />
               <Link to="/bmi">BMI</Link>
               <Link to="/activities">ACTIVITIES</Link>
+              <button
+                onClick={() => {
+                  queryCache.clear()
+                }}
+              >
+                adasd
+              </button>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/activities" component={Activities} />
