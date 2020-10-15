@@ -1,10 +1,10 @@
 import React from "react"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import PrivateRoute from "./components/PrivateRoute"
 import { IdentityContextProvider } from "react-netlify-identity-widget"
 import AppContextProvider from "./context/AppContextProvider"
 import IdentityModalContextProvider from "./context/IdentityModalContextProvider"
-import { Home, Error } from "./pages"
+import { Home, Activities, BMI, Error } from "./pages"
 
 import "react-netlify-identity-widget/styles.css"
 import "@reach/tabs/styles.css"
@@ -17,11 +17,13 @@ const App = () => {
         <AppContextProvider>
           <IdentityModalContextProvider>
             <Router>
+              <Link to="/bmi">BMI</Link>
+              <Link to="/activities">ACTIVITIES</Link>
               <Switch>
                 <Route exact path="/" component={Home} />
-                <PrivateRoute path="/activity" />
+                <Route path="/activities" component={Activities} />
                 <PrivateRoute path="/pressure" />
-                <PrivateRoute path="/bmi" />
+                <Route path="/bmi" component={BMI} />
                 <Route path="/*" component={Error} />
               </Switch>
             </Router>
