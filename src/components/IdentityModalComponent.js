@@ -1,8 +1,18 @@
-import React, { useContext, useCallback } from "react"
+import React, { useContext, useCallback, createContext, useState } from "react"
 import { useHistory } from "react-router-dom"
-import { IdentityModalContext } from "../context/IdentityModalContextProvider"
 import { IdentityModal } from "react-netlify-identity-widget"
 import { queryCache } from "react-query"
+
+export const IdentityModalContext = createContext()
+
+export const IdentityModalContextProvider = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  return (
+    <IdentityModalContext.Provider value={{ isOpen, setIsOpen }}>
+      {children}
+    </IdentityModalContext.Provider>
+  )
+}
 
 const IdentityModalComponent = () => {
   const { isOpen, setIsOpen } = useContext(IdentityModalContext)

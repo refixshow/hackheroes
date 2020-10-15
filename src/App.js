@@ -1,13 +1,14 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { IdentityContextProvider } from "react-netlify-identity-widget"
+import IdentityModalComponent, {
+  IdentityModalContextProvider,
+} from "./components/IdentityModalComponent"
 import "react-netlify-identity-widget/styles.css"
 import "@reach/tabs/styles.css"
 
 import { Home, Activities, Pressure, BMI, Error } from "./pages"
 import AppContextProvider from "./context/AppContextProvider"
-import IdentityModalContextProvider from "./context/IdentityModalContextProvider"
-import IdentityModalComponent from "./components/IdentityModalComponent"
 import PrivateRoute from "./components/PrivateRoute"
 
 const App = () => {
