@@ -1,10 +1,14 @@
+const getConnection = require('../db/index');
+
 exports.handler = async (event, context, callback) => {
-  const { clientContext: user } = context
+    const { clientContext: user } = context;
 
-  console.log("USER FROM NETLIFY", user)
+    console.log('USER FROM NETLIFY', user);
 
-  callback(null, {
-    statusCode: 200,
-    body: "OK",
-  })
-}
+    const db = await getConnection();
+
+    callback(null, {
+        statusCode: 200,
+        body: 'OK',
+    });
+};
