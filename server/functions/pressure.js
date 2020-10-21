@@ -1,5 +1,5 @@
 const getConnection = require('../db/index');
-let Pressure = require('../db/models/bmi');
+let Pressure = require('../db/models/pressure');
 
 exports.handler = async (event, context, callback) => {
     const { clientContext: user } = context;
@@ -8,15 +8,15 @@ exports.handler = async (event, context, callback) => {
         if (event.httpMethod === 'GET') {
             const db = await getConnection();
 
-            const pressure = JSON.stringify(await Pressure.find({}));
+            const pressure = (await Pressure.find({})).toString();
 
             callback(null, {
                 statusCode: 200,
-                body: 'OK',
+                body: pressure,
             });
         } else if (event.httpMethod === 'POST') {
             const db = await getConnection();
-            const { user_id, date, sys_pressure, dias_pressure, status } = event.headers;
+            const { user_id, date, sys_pressure, dias_pressure, status } = JSON.parse(event.body);
 
             const newPressureTest = new Pressure({
                 user_id,
@@ -26,15 +26,15 @@ exports.handler = async (event, context, callback) => {
                 status,
             });
 
-            newPressureTest.save().catch((err) => console.log(err));
+            newPressureTest.save();
 
             callback(null, {
-                statusCode: 200,
+                statusCode: 201,
                 body: 'Pressure test saved',
             });
         } else if (event.httpMethod === 'PATCH') {
             const db = await getConnection();
-            const { pressure_test_id, date, sys_pressure, dias_pressure, status } = event.headers;
+            const { pressure_test_id, date, sys_pressure, dias_pressure, status } = JSON.parse(event.body);
 
             Pressure.updateOne({ id: pressure_test_id }, { date, sys_pressure, dias_pressure, status });
 
@@ -45,7 +45,7 @@ exports.handler = async (event, context, callback) => {
         } else if (event.httpMethod === 'DELETE') {
             const db = await getConnection();
 
-            const { pressure_test_id } = event.headers;
+            const { pressure_test_id } = JSON.parse(event.body);
 
             Pressure.deleteOne({ id: pressure_test_id });
 
@@ -55,13 +55,13 @@ exports.handler = async (event, context, callback) => {
             });
         } else {
             callback(null, {
-                statusCode: 422,
+                statusCode: 400,
                 body: 'Bad request',
             });
         }
     } else {
         callback(null, {
-            statusCode: 422,
+            statusCode: 401,
             body: 'Unauthorized request',
         });
     }

@@ -8,17 +8,16 @@ exports.handler = async (event, context, callback) => {
         if (event.httpMethod === 'GET') {
             const db = await getConnection();
 
-            const bmi = JSON.stringify(await BMI.find({}));
+            const bmi = (await BMI.find({})).toString();
 
             callback(null, {
                 statusCode: 200,
-                body: 'OK',
+                body: bmi,
             });
         } else if (event.httpMethod === 'POST') {
             const db = await getConnection();
-            const { user_id, date, weight, height, bmi } = event.headers;
+            const { user_id, date, weight, height, bmi } = JSON.parse(event.body);
 
-            console.log(user_id + date + weight + height + bmi);
             const bmiTest = new BMI({
                 user_id,
                 date,
@@ -27,16 +26,16 @@ exports.handler = async (event, context, callback) => {
                 bmi,
             });
 
-            bmiTest.save().catch((err) => console.log(err));
+            bmiTest.save();
 
             callback(null, {
-                statusCode: 200,
+                statusCode: 201,
                 body: 'BMI test saved',
             });
         } else if (event.httpMethod === 'DELETE') {
             const db = await getConnection();
 
-            const { bmi_test_id } = event.headers;
+            const { bmi_test_id } = JSON.parse(event.body);
 
             BMI.deleteOne({ id: bmi_test_id });
 
@@ -46,13 +45,13 @@ exports.handler = async (event, context, callback) => {
             });
         } else {
             callback(null, {
-                statusCode: 422,
+                statusCode: 400,
                 body: 'Bad request',
             });
         }
     } else {
         callback(null, {
-            statusCode: 422,
+            statusCode: 401,
             body: 'Unauthorized request',
         });
     }
