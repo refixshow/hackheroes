@@ -1,21 +1,27 @@
 const getConnection = require('../db/index');
-let BMI = require('../db/models/bmi');
+const BMI = require('../db/models/Bmi');
 
 exports.handler = async (event, context, callback) => {
     const { clientContext: user } = context;
+    const db = await getConnection();
 
     if (true) {
         if (event.httpMethod === 'GET') {
-            const db = await getConnection();
-
-            const bmi = (await BMI.find({})).toString();
-
-            callback(null, {
-                statusCode: 200,
-                body: bmi,
-            });
+            const { bmi_id } = JSON.parse(event.body);
+            await BMI.find({ _id: bmi_id })
+                .then((res) => {
+                    callback(null, {
+                        statusCode: 200,
+                        body: JSON.stringify({ response: res, message: 'OK' }),
+                    });
+                })
+                .catch((err) => {
+                    callback(null, {
+                        statusCode: 404,
+                        body: JSON.stringify({ response: err, message: 'Not found' }),
+                    });
+                });
         } else if (event.httpMethod === 'POST') {
-            const db = await getConnection();
             const { user_id, date, weight, height, bmi } = JSON.parse(event.body);
 
             const bmiTest = new BMI({
@@ -26,23 +32,36 @@ exports.handler = async (event, context, callback) => {
                 bmi,
             });
 
-            bmiTest.save();
-
-            callback(null, {
-                statusCode: 201,
-                body: 'BMI test saved',
-            });
+            await bmiTest
+                .save()
+                .then((res) => {
+                    callback(null, {
+                        statusCode: 200,
+                        body: JSON.stringify({ response: res, message: 'OK' }),
+                    });
+                })
+                .catch((err) => {
+                    callback(null, {
+                        statusCode: 404,
+                        body: JSON.stringify({ response: err, message: 'Not found' }),
+                    });
+                });
         } else if (event.httpMethod === 'DELETE') {
-            const db = await getConnection();
+            const { bmi_id } = JSON.parse(event.body);
 
-            const { bmi_test_id } = JSON.parse(event.body);
-
-            BMI.deleteOne({ id: bmi_test_id });
-
-            callback(null, {
-                statusCode: 200,
-                body: 'OK',
-            });
+            await BMI.deleteOne({ _id: bmi_id })
+                .then((res) => {
+                    callback(null, {
+                        statusCode: 200,
+                        body: JSON.stringify({ response: res, message: 'OK' }),
+                    });
+                })
+                .catch((err) => {
+                    callback(null, {
+                        statusCode: 404,
+                        body: JSON.stringify({ response: err, message: 'Not found' }),
+                    });
+                });
         } else {
             callback(null, {
                 statusCode: 400,

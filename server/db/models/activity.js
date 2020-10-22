@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const activity = new mongoose.Schema({
+const activityModel = new mongoose.Schema({
     user_id: String,
     type: String,
     length: Number,
@@ -8,6 +8,6 @@ const activity = new mongoose.Schema({
     date: Date,
 });
 
-const Activity = mongoose.model('Activity', activity);
+const Activity = mongoose.model('Activity', activityModel);
 
 module.exports = Activity;

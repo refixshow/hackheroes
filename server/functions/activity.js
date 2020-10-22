@@ -1,21 +1,27 @@
 const getConnection = require('../db/index');
-let Activity = require('../db/models/activity');
+const Activity = require('../db/models/Activity');
 
 exports.handler = async (event, context, callback) => {
     const { clientContext: user } = context;
+    const db = await getConnection();
 
     if (true) {
         if (event.httpMethod === 'GET') {
-            const db = await getConnection();
-
-            const activities = (await Activity.find({})).toString();
-
-            callback(null, {
-                statusCode: 200,
-                body: activities,
-            });
+            const { activity_id } = JSON.parse(event.body);
+            await Activity.find({ _id: activity_id })
+                .then((res) => {
+                    callback(null, {
+                        statusCode: 200,
+                        body: JSON.stringify({ response: res, message: 'OK' }),
+                    });
+                })
+                .catch((err) => {
+                    callback(null, {
+                        statusCode: 404,
+                        body: JSON.stringify({ response: err, message: 'Not found' }),
+                    });
+                });
         } else if (event.httpMethod === 'POST') {
-            const db = await getConnection();
             const { user_id, type, length, calories, date } = JSON.parse(event.body);
 
             const newActivity = new Activity({
@@ -26,33 +32,52 @@ exports.handler = async (event, context, callback) => {
                 date,
             });
 
-            newActivity.save();
-
-            callback(null, {
-                statusCode: 201,
-                body: 'Activity saved',
-            });
+            await newActivity
+                .save()
+                .then((res) => {
+                    callback(null, {
+                        statusCode: 201,
+                        body: JSON.stringify({ response: res, message: 'OK' }),
+                    });
+                })
+                .catch((err) => {
+                    callback(null, {
+                        statusCode: 404,
+                        body: JSON.stringify({ response: err, message: 'Not found' }),
+                    });
+                });
         } else if (event.httpMethod === 'PATCH') {
-            const db = await getConnection();
             const { activity_id, type, length, calories, date } = JSON.parse(event.body);
 
-            Activity.updateOne({ id: activity_id }, { type, length, calories, date });
-
-            callback(null, {
-                statusCode: 200,
-                body: 'OK',
-            });
+            await Activity.updateOne({ _id: activity_id }, { type, length, calories, date })
+                .then((res) => {
+                    callback(null, {
+                        statusCode: 200,
+                        body: JSON.stringify({ response: res, message: 'OK' }),
+                    });
+                })
+                .catch((err) => {
+                    callback(null, {
+                        statusCode: 404,
+                        body: JSON.stringify({ response: err, message: 'Not found' }),
+                    });
+                });
         } else if (event.httpMethod === 'DELETE') {
-            const db = await getConnection();
-
             const { activity_id } = JSON.parse(event.body);
 
-            Activity.deleteOne({ id: activity_id });
-
-            callback(null, {
-                statusCode: 200,
-                body: 'OK',
-            });
+            await Activity.deleteOne({ _id: activity_id })
+                .then((res) => {
+                    callback(null, {
+                        statusCode: 200,
+                        body: JSON.stringify({ response: res, message: 'OK' }),
+                    });
+                })
+                .catch((err) => {
+                    callback(null, {
+                        statusCode: 404,
+                        body: JSON.stringify({ response: err, message: 'Not found' }),
+                    });
+                });
         } else {
             callback(null, {
                 statusCode: 400,

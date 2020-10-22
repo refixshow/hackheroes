@@ -1,21 +1,27 @@
 const getConnection = require('../db/index');
-let User = require('../db/models/user');
+const User = require('../db/models/User');
 
 exports.handler = async (event, context, callback) => {
     const { clientContext: user } = context;
+    const db = await getConnection();
 
     if (true) {
         if (event.httpMethod === 'GET') {
-            const db = await getConnection();
-
-            const users = (await User.find({})).toString();
-
-            callback(null, {
-                statusCode: 200,
-                body: users,
-            });
+            const { user_id } = JSON.parse(event.body);
+            await User.find({})
+                .then((res) => {
+                    callback(null, {
+                        statusCode: 200,
+                        body: JSON.stringify({ response: res, message: 'OK' }),
+                    });
+                })
+                .catch((err) => {
+                    callback(null, {
+                        statusCode: 404,
+                        body: JSON.stringify({ response: err, message: 'Not found' }),
+                    });
+                });
         } else if (event.httpMethod === 'POST') {
-            const db = await getConnection();
             const { email, name, birth_date } = JSON.parse(event.body);
 
             const newUser = new User({
@@ -29,33 +35,52 @@ exports.handler = async (event, context, callback) => {
                 },
             });
 
-            newUser.save();
-
-            callback(null, {
-                statusCode: 201,
-                body: 'User saved',
-            });
+            await newUser
+                .save()
+                .then((res) => {
+                    callback(null, {
+                        statusCode: 200,
+                        body: JSON.stringify({ response: res, message: 'OK' }),
+                    });
+                })
+                .catch((err) => {
+                    callback(null, {
+                        statusCode: 404,
+                        body: JSON.stringify({ response: err, message: 'Not found' }),
+                    });
+                });
         } else if (event.httpMethod === 'PATCH') {
-            const db = await getConnection();
             const { user_id, email, name, birth_date } = JSON.parse(event.body);
 
-            User.updateOne({ id: user_id }, { email, name, birth_date });
-
-            callback(null, {
-                statusCode: 200,
-                body: 'OK',
-            });
+            await User.updateOne({ _id: user_id }, { email, name, birth_date })
+                .then((res) => {
+                    callback(null, {
+                        statusCode: 200,
+                        body: JSON.stringify({ response: res, message: 'OK' }),
+                    });
+                })
+                .catch((err) => {
+                    callback(null, {
+                        statusCode: 404,
+                        body: JSON.stringify({ response: err, message: 'Not found' }),
+                    });
+                });
         } else if (event.httpMethod === 'DELETE') {
-            const db = await getConnection();
-
             const { user_id } = JSON.parse(event.body);
 
-            User.deleteOne({ id: user_id });
-
-            callback(null, {
-                statusCode: 200,
-                body: 'OK',
-            });
+            User.deleteOne({ _id: user_id })
+                .then((res) => {
+                    callback(null, {
+                        statusCode: 200,
+                        body: JSON.stringify({ response: res, message: 'OK' }),
+                    });
+                })
+                .catch((err) => {
+                    callback(null, {
+                        statusCode: 404,
+                        body: JSON.stringify({ response: err, message: 'Not found' }),
+                    });
+                });
         } else {
             callback(null, {
                 statusCode: 400,

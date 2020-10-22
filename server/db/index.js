@@ -7,7 +7,7 @@ let cachedDB = null;
 const uri = process.env.DB_PATH;
 
 const getConnection = async () => {
-    if (cachedDB == null) {
+    if (!cachedDB) {
         cachedDB = await mongoose.connect(uri, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -17,9 +17,3 @@ const getConnection = async () => {
 };
 
 module.exports = getConnection;
-
-// TO DO
-// wyczyscic te gowno funkcje
-// klasy i metody
-// usuwanie testow itp usuwa je z tablic usera
-// osobne funkcje do kazdej funkcjonalnosci

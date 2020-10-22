@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const bmiTestSchema = new mongoose.Schema({
+const bmiModel = new mongoose.Schema({
     user_id: String,
     date: Date,
     weight: Number,
@@ -8,6 +8,6 @@ const bmiTestSchema = new mongoose.Schema({
     bmi: Number,
 });
 
-const BMI = mongoose.model('Bmi', bmiTestSchema);
+const BMI = mongoose.model('Bmi', bmiModel);
 
 module.exports = BMI;

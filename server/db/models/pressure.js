@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const pressureTest = new mongoose.Schema({
+const pressureModel = new mongoose.Schema({
     user_id: String,
     date: Date,
     sys_pressure: Number, // Systolic pressure
@@ -8,6 +8,6 @@ const pressureTest = new mongoose.Schema({
     status: String,
 });
 
-const Pressure = mongoose.model('Pressure', pressureTest);
+const Pressure = mongoose.model('Pressure', pressureModel);
 
 module.exports = Pressure;
