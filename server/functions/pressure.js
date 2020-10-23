@@ -1,5 +1,6 @@
 const getConnection = require("../db/index");
-const Pressure = require("../db/models/Pressure");
+const PressureModel = require("../db/models/Pressure");
+const FunctionConstructor = require("./lib/functionConstructor");
 
 exports.handler = async (event, context, callback) => {
   const { clientContext: user } = context;
@@ -14,12 +15,12 @@ exports.handler = async (event, context, callback) => {
     }
     const parsedBody = JSON.parse(body);
     await getConnection();
+    const Pressure = new FunctionConstructor(PressureModel, parsedBody);
 
     switch (httpMethod) {
       case "GET":
         try {
-          const { pressure_id } = parsedBody;
-          const res = await Pressure.find({ _id: pressure_id });
+          const res = await Pressure.get();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
@@ -33,15 +34,7 @@ exports.handler = async (event, context, callback) => {
         break;
       case "POST":
         try {
-          const { user_id, date, sys_pressure, dias_pressure, status } = parsedBody;
-          const newPressure = new Pressure({
-            user_id,
-            date,
-            sys_pressure,
-            dias_pressure,
-            status,
-          });
-          const res = await newPressure.save();
+          const res = await Pressure.post();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
@@ -55,8 +48,7 @@ exports.handler = async (event, context, callback) => {
         break;
       case "PATCH":
         try {
-          const { pressure_test_id, date, sys_pressure, dias_pressure, status } = parsedBody;
-          const res = await Pressure.updateOne({ _id: pressure_test_id }, { date, sys_pressure, dias_pressure, status });
+          const res = await Pressure.patch();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
@@ -70,8 +62,7 @@ exports.handler = async (event, context, callback) => {
         break;
       case "DELETE":
         try {
-          const { pressure_id } = parsedBody;
-          const res = await Pressure.deleteOne({ _id: pressure_id });
+          const res = await Pressure.delete();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),

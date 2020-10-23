@@ -1,3 +1,9 @@
+//    //=========\\
+//    ||         ||
+//    ||  R.I.P. ||
+//    ||  2020   ||
+//    ||_________||
+
 const handleRequest = (given, expected) => {
   return new Promise((resolve, reject) => {
     const keys = Object.keys(given);
