@@ -21,11 +21,11 @@ const IdentityModalContextProvider = ({ children }) => {
 
   const handleOnCloseDialog = useCallback(() => {
     setIsOpen(false)
-  }, [setIsOpen])
+  }, [])
 
   const handleOnLogin = useCallback(() => {
     history.push("/activity")
-  }, [history])
+  }, [])
 
   return (
     <IdentityContextProvider url={url}>

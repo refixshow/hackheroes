@@ -25,6 +25,9 @@ const Activities = () => {
           { x: "Cz. 15:25", y: 80 },
           { x: "Cz. 15:26", y: 132 },
           { x: "Cz. 15:27", y: 88 },
+          { x: "Cz. 15:27", y: 98 },
+          { x: "Cz. 15:27", y: 88 },
+          { x: "Cz. 15:31", y: 100 },
         ],
       },
     ],
@@ -39,8 +42,6 @@ const Activities = () => {
     []
   )
 
-  console.log(useTime)
-
   return (
     <div>
       <div
@@ -50,6 +51,7 @@ const Activities = () => {
         }}
       >
         <Chart data={data} axes={axes} tooltip primaryCursor secondaryCursor />
+        <button onClick={() => {}}>click</button>
       </div>
     </div>
   )

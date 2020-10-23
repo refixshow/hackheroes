@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import "react-netlify-identity-widget/styles.css"
 import "@reach/tabs/styles.css"
 
-import AppContextProvider from "./context/AppContextProvider"
+import IdentityModalContextProvider from "./context/IdentityModalContextProvider"
 import PrivateRoute from "./components/PrivateRoute"
 import { Home, Activities, Pressure, BMI, Covid19, Error } from "./pages"
 import { Nav } from "./components/molecules"
@@ -12,7 +12,7 @@ import { Nav } from "./components/molecules"
 const App = () => {
   return (
     <div>
-      <AppContextProvider>
+      <IdentityModalContextProvider>
         <Router>
           <Switch>
             <Route exact path="/" component={Home} />
@@ -24,7 +24,7 @@ const App = () => {
           </Switch>
           <Nav />
         </Router>
-      </AppContextProvider>
+      </IdentityModalContextProvider>
     </div>
   )
 }
