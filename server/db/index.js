@@ -1,19 +1,19 @@
 // Index.js for DB
 // Checks if database connection is already established
 // IF NOT connects to database
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-let cachedDB = null
-const uri = process.env.DB_PATH
+let cachedDB = null;
+const uri = process.env.DB_PATH;
 
 const getConnection = async () => {
   if (!cachedDB) {
     cachedDB = await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    })
+    });
   }
-  return cachedDB
-}
+  return cachedDB;
+};
 
-module.exports = getConnection
+module.exports = getConnection;
