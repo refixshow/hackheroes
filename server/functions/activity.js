@@ -29,7 +29,7 @@ exports.handler = async (event, context, callback) => {
                         statusCode: 404,
                         body: JSON.stringify({
                             response: null,
-                            message: `Not Found, ${err}`,
+                            message: 'Not Found',
                         }),
                     });
                 }
@@ -54,7 +54,7 @@ exports.handler = async (event, context, callback) => {
                         statusCode: 404,
                         body: JSON.stringify({
                             response: null,
-                            message: `Not found, ${err}`,
+                            message: 'Not found',
                         }),
                     });
                 }
@@ -72,7 +72,7 @@ exports.handler = async (event, context, callback) => {
                         statusCode: 404,
                         body: JSON.stringify({
                             response: null,
-                            message: `Not found, ${err}`,
+                            message: 'Not found',
                         }),
                     });
                 }
@@ -90,7 +90,7 @@ exports.handler = async (event, context, callback) => {
                         statusCode: 404,
                         body: JSON.stringify({
                             response: null,
-                            message: `Not found, ${err}`,
+                            message: 'Not found',
                         }),
                     });
                 }
