@@ -1,4 +1,5 @@
 import React, { useReducer, createContext } from "react"
+import IdentityModalContext from "./IdentityModalContextProvider"
 import reducer from "../reducers/AppReducer"
 
 const initialstate = {}
@@ -9,7 +10,7 @@ const AppContextProvider = ({ children }) => {
   const [state, dispach] = useReducer(reducer, initialstate)
   return (
     <AppContext.Provider value={{ state, dispach }}>
-      {children}
+      <IdentityModalContext>{children}</IdentityModalContext>
     </AppContext.Provider>
   )
 }

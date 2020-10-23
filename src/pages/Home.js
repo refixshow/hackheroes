@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from "react"
-import { IdentityModalContext } from "../components/IdentityModalComponent"
+import { IdentityModalContext } from "../context/IdentityModalContextProvider"
 
 const Home = () => {
   const { setIsOpen } = useContext(IdentityModalContext)

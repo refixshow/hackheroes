@@ -1,36 +1,30 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import { IdentityContextProvider } from "react-netlify-identity-widget"
-import IdentityModalComponent, {
-  IdentityModalContextProvider,
-} from "./components/IdentityModalComponent"
+
 import "react-netlify-identity-widget/styles.css"
 import "@reach/tabs/styles.css"
 
-import { Home, Activities, Pressure, BMI, Error } from "./pages"
 import AppContextProvider from "./context/AppContextProvider"
 import PrivateRoute from "./components/PrivateRoute"
+import { Home, Activities, Pressure, BMI, Covid19, Error } from "./pages"
+import { Nav } from "./components/molecules"
 
 const App = () => {
-  const url = process.env.REACT_APP_NETLIFY_IDENTITY_URL
   return (
     <div>
-      <IdentityContextProvider url={url}>
-        <AppContextProvider>
-          <IdentityModalContextProvider>
-            <Router>
-              <IdentityModalComponent />
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <PrivateRoute path="/activities" component={Activities} />
-                <PrivateRoute path="/pressure" component={Pressure} />
-                <PrivateRoute path="/bmi" component={BMI} />
-                <Route path="/*" component={Error} />
-              </Switch>
-            </Router>
-          </IdentityModalContextProvider>
-        </AppContextProvider>
-      </IdentityContextProvider>
+      <AppContextProvider>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/activities" component={Activities} />
+            <PrivateRoute path="/pressure" component={Pressure} />
+            <PrivateRoute path="/bmi" component={BMI} />
+            <PrivateRoute path="/covid19" component={Covid19} />
+            <Route path="/*" component={Error} />
+          </Switch>
+          <Nav />
+        </Router>
+      </AppContextProvider>
     </div>
   )
 }
