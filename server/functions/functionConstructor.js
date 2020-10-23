@@ -19,6 +19,7 @@ const Function = (model, body) => {
     this.post = async () => {
         try{
             const {user_id, ...data} = this.body;
+            // Ten if jest tu dlatego, ze user_id wystepuje w metodzie POST we wszystkich funkcjach z wyjatkiem 'user'
             if(user_id) {
                 data.user_id = user_id;
             }
