@@ -4,7 +4,7 @@ const Function = (model, body) => {
     this.get = async () => {
         try {
             const { object_id } = this.body;
-            const res = this.model.find({ _id: object_id });
+            const res = await this.model.find({ _id: object_id });
             callback(null, {
                 statusCode: 200,
                 body: JSON.stringify({ response: res, message: 'OK' }),
