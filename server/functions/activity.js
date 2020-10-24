@@ -1,31 +1,30 @@
-const getConnection = require("../db/index")
-const ActivityModel = require("../db/models/Activity")
-const FunctionConstructor = require("../helpers/FunctionConstructor")
+const getConnection = require("../db/index");
+const ActivityModel = require("../db/models/Activity");
+const FunctionConstructor = require("./lib/functionConstructor");
 
 exports.handler = async (event, context, callback) => {
-  const { clientContext: user } = context
+  const { clientContext: user } = context;
 
   if (true) {
-    const { httpMethod, body } = event
+    const { httpMethod, body } = event;
     if (!body) {
       callback(null, {
         statusCode: 400,
         body: "Bad request",
-      })
+      });
     }
-    const parsedBody = JSON.parse(body)
-    await getConnection()
-    const Activity = new FunctionConstructor(ActivityModel, parsedBody)
+    const parsedBody = JSON.parse(body);
+    await getConnection();
+    const Activity = new FunctionConstructor(ActivityModel, parsedBody);
 
     switch (httpMethod) {
       case "GET":
         try {
-          const { user_id } = parsedBody
-          const res = await ActivityModel.find({ user_id })
+          const res = await Activity.get();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
-          })
+          });
         } catch (err) {
           callback(null, {
             statusCode: 404,
@@ -33,24 +32,16 @@ exports.handler = async (event, context, callback) => {
               response: null,
               message: "Not Found",
             }),
-          })
+          });
         }
-        break
+        break;
       case "POST":
         try {
-          const { user_id, type, length, calories, date } = parsedBody
-          const newActivity = new Activity({
-            user_id,
-            type,
-            length,
-            calories,
-            date,
-          })
-          const res = await newActivity.save()
+          const res = await Activity.post();
           callback(null, {
             statusCode: 201,
             body: JSON.stringify({ response: res, message: "OK" }),
-          })
+          });
         } catch (err) {
           callback(null, {
             statusCode: 404,
@@ -58,20 +49,16 @@ exports.handler = async (event, context, callback) => {
               response: null,
               message: "Not found",
             }),
-          })
+          });
         }
-        break
+        break;
       case "PATCH":
         try {
-          const { activity_id, type, length, calories, date } = parsedBody
-          const res = await Activity.updateOne(
-            { _id: activity_id },
-            { type, length, calories, date }
-          )
+          const res = await Activity.patch();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
-          })
+          });
         } catch (err) {
           callback(null, {
             statusCode: 404,
@@ -79,17 +66,16 @@ exports.handler = async (event, context, callback) => {
               response: null,
               message: "Not found",
             }),
-          })
+          });
         }
-        break
+        break;
       case "DELETE":
         try {
-          const { activity_id } = parsedBody
-          const res = await Activity.deleteOne({ _id: activity_id })
+          const res = await Activity.delete();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
-          })
+          });
         } catch (err) {
           callback(null, {
             statusCode: 404,
@@ -97,19 +83,19 @@ exports.handler = async (event, context, callback) => {
               response: null,
               message: "Not found",
             }),
-          })
+          });
         }
-        break
+        break;
       default:
         callback(null, {
           statusCode: 400,
           body: "Bad request",
-        })
+        });
     }
   } else {
     callback(null, {
       statusCode: 401,
       body: "Unauthorized request",
-    })
+    });
   }
-}
+};

@@ -1,5 +1,6 @@
 const getConnection = require("../db/index");
-const BMI = require("../db/models/Bmi");
+const BMIModel = require("../db/models/Bmi");
+const FunctionConstructor = require("./lib/functionConstructor");
 
 exports.handler = async (event, context, callback) => {
   const { clientContext: user } = context;
@@ -14,12 +15,12 @@ exports.handler = async (event, context, callback) => {
     }
     const parsedBody = JSON.parse(body);
     await getConnection();
+    const BMI = new FunctionConstructor(BMIModel, parsedBody);
 
     switch (httpMethod) {
       case "GET":
         try {
-          const { bmi_id } = parsedBody;
-          const res = await BMI.find({ _id: bmi_id });
+          const res = await BMI.get();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
@@ -33,15 +34,7 @@ exports.handler = async (event, context, callback) => {
         break;
       case "POST":
         try {
-          const { user_id, date, weight, height, bmi } = parsedBody;
-          const newBMI = new BMI({
-            user_id,
-            date,
-            weight,
-            height,
-            bmi,
-          });
-          const res = await newBMI.save();
+          const res = await BMI.post();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
@@ -55,8 +48,7 @@ exports.handler = async (event, context, callback) => {
         break;
       case "PATCH":
         try {
-          const { bmi_id, date, weight, height, bmi } = parsedBody;
-          const res = await BMI.updateOne({ _id: bmi_id }, { date, weight, height, bmi });
+          const res = await BMI.patch();
         } catch (err) {
           callback(null, {
             statusCode: 404,
@@ -69,8 +61,7 @@ exports.handler = async (event, context, callback) => {
         break;
       case "DELETE":
         try {
-          const { bmi_id } = parsedBody;
-          const res = await BMI.deleteOne({ _id: bmi_id });
+          const res = await BMI.delete();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
