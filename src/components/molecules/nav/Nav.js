@@ -8,13 +8,15 @@ const Nav = () => {
   if (true) {
     return (
       <nav>
-        <Link to="activities">activities</Link>
+        <Link to="/activities">activities</Link>
         <br></br>
-        <Link to="bmi">bmi</Link>
+        <Link to="/bmi">bmi</Link>
         <br></br>
-        <Link to="pressure">pressure</Link>
+        <Link to="/pressure">pressure</Link>
         <br></br>
-        <Link to="covid19">Covid</Link>
+        <Link to="/covid19">Covid</Link>
+        <br></br>
+        <Link to="/user">user</Link>
       </nav>
     )
   }

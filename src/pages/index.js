@@ -1,8 +1,7 @@
-import Home from "./Home"
-import Error from "./Error"
-import Activities from "./Activities"
-import BMI from "./BMI"
-import Pressure from "./Pressure"
-import Covid19 from "./Covid19"
-
-export { Home, Activities, BMI, Pressure, Covid19, Error }
+export { default as Home } from "./Home"
+export { default as Error } from "./Error"
+export { default as Activities } from "./Activities"
+export { default as BMI } from "./BMI"
+export { default as Pressure } from "./Pressure"
+export { default as Covid19 } from "./Covid19"
+export { default as User } from "./User"

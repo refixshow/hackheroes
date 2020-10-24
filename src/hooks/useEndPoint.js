@@ -29,7 +29,7 @@ export default function ({ type, payload }) {
           },
         }
       )
-    case "CREATE":
+    case "POST":
       return useMutation(
         (values) =>
           axios

@@ -1,18 +1,17 @@
 import React from "react"
-// import useBMI from "../hooks/useBMI/useBMI"
+import ReactChart from "../components/organisms/ReactChart"
 
 const BMI = () => {
-  // const { data, isError, isLoading, error } = useBMI()
-
-  // if (isError) {
-  //   return <div>{error}</div>
-  // }
-
-  // if (isLoading) {
-  //   return <div>is Loading</div>
-  // }
-
-  return <div>BMI</div>
+  return (
+    <div
+      style={{
+        width: "800px",
+        height: "600px",
+      }}
+    >
+      <ReactChart queryKey="bmi" endPointName="bmi" />
+    </div>
+  )
 }
 
 export default BMI
