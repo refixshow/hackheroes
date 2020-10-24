@@ -1,11 +1,12 @@
 class FunctionConstructor {
-  constructor(model, body) {
+  constructor(model, body, params) {
     this.model = model;
     this.body = body;
+    this.params = params;
   }
 
   get = () => {
-    const { user_id, email } = this.body;
+    const { user_id, email } = this.params;
     if (!user_id) {
       return this.model.find({ email });
     }

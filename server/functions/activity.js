@@ -1,21 +1,24 @@
 const getConnection = require("../db/index");
 const ActivityModel = require("../db/models/Activity");
-const FunctionConstructor = require("./lib/functionConstructor");
+const FunctionConstructor = require("../helpers/FunctionConstructor");
 
 exports.handler = async (event, context, callback) => {
   const { clientContext: user } = context;
 
   if (true) {
     const { httpMethod, body } = event;
-    if (!body) {
+    const params = event.queryStringParameters;
+    if (!body && !params) {
       callback(null, {
         statusCode: 400,
         body: "Bad request",
       });
     }
-    const parsedBody = JSON.parse(body);
+    const parsedBody = {};
+    body ? (parsedBody = JSON.parse(body)) : null;
+
     await getConnection();
-    const Activity = new FunctionConstructor(ActivityModel, parsedBody);
+    const Activity = new FunctionConstructor(ActivityModel, parsedBody, params);
 
     switch (httpMethod) {
       case "GET":
