@@ -1,6 +1,6 @@
 const getConnection = require("../db/index");
 const UserModel = require("../db/models/User");
-const FunctionConstructor = require("./lib/functionConstructor");
+const FunctionConstructor = require("../helpers/FunctionConstructor");
 
 exports.handler = async (event, context, callback) => {
   const { clientContext: user } = context;
