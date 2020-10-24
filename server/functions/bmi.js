@@ -7,13 +7,17 @@ exports.handler = async (event, context, callback) => {
 
   if (true) {
     const { httpMethod, body } = event;
-    if (!body) {
+    const params = event.queryStringParameters;
+
+    if (!body && Object.keys(params).length === 0) {
       callback(null, {
         statusCode: 400,
         body: "Bad request",
       });
     }
-    const parsedBody = JSON.parse(body);
+    const parsedBody = {};
+    body ? (parsedBody = JSON.parse(body)) : null;
+
     await getConnection();
     const BMI = new FunctionConstructor(BMIModel, parsedBody);
 

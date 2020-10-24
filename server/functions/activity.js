@@ -8,7 +8,7 @@ exports.handler = async (event, context, callback) => {
   if (true) {
     const { httpMethod, body } = event;
     const params = event.queryStringParameters;
-    console.log(event);
+
     if (!body && Object.keys(params).length === 0) {
       callback(null, {
         statusCode: 400,
