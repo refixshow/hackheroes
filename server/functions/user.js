@@ -1,5 +1,6 @@
 const getConnection = require("../db/index");
-const User = require("../db/models/User");
+const UserModel = require("../db/models/User");
+const FunctionConstructor = require("./lib/functionConstructor");
 
 exports.handler = async (event, context, callback) => {
   const { clientContext: user } = context;
@@ -15,12 +16,12 @@ exports.handler = async (event, context, callback) => {
     }
     const parsedBody = JSON.parse(body);
     await getConnection();
+    const User = new FunctionConstructor(UserModel, parsedBody);
 
     switch (httpMethod) {
       case "GET":
         try {
-          const { user_id } = parsedBody;
-          const res = await User.find({ _id: user_id });
+          const res = await User.get();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
@@ -34,18 +35,7 @@ exports.handler = async (event, context, callback) => {
         break;
       case "POST":
         try {
-          const { email, name, birth_date } = parsedBody;
-          const newUser = new User({
-            email,
-            name,
-            birth_date,
-            meta: {
-              bmi_his: [],
-              pressure_his: [],
-              activities_his: [],
-            },
-          });
-          const res = await newUser.save();
+          const res = await User.post();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
@@ -59,8 +49,7 @@ exports.handler = async (event, context, callback) => {
         break;
       case "PATCH":
         try {
-          const { user_id, email, name, birth_date } = parsedBody;
-          const res = await User.updateOne({ _id: user_id }, { email, name, birth_date });
+          const res = await User.patch();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
@@ -74,8 +63,7 @@ exports.handler = async (event, context, callback) => {
         break;
       case "DELETE":
         try {
-          const { user_id } = parsedBody;
-          const res = await User.deleteOne({ _id: user_id });
+          const res = await User.delete();
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
