@@ -1,58 +1,62 @@
-const getConnection = require("../db/index");
-const BMIModel = require("../db/models/Bmi");
-const FunctionConstructor = require("../helpers/FunctionConstructor");
+const getConnection = require("../db/index")
+const BMIModel = require("../db/models/Bmi")
+const FunctionConstructor = require("../helpers/FunctionConstructor")
 
 exports.handler = async (event, context, callback) => {
-  const { clientContext: user } = context;
+  const { clientContext: user } = context
 
   if (true) {
-    const { httpMethod, body } = event;
-    const params = event.queryStringParameters;
+    const { httpMethod, body } = event
+    const params = event.queryStringParameters
 
-    if (!body && Object.keys(params).length === 0) {
-      callback(null, {
-        statusCode: 400,
-        body: "Bad request",
-      });
+    let parsedBody = {}
+
+    if (Object.keys(params).length === 0) {
+      if (!body) {
+        callback(null, {
+          statusCode: 400,
+          body: "Bad request",
+        })
+      } else {
+        parsedBody = JSON.parse(body)
+      }
     }
-    const parsedBody = {};
-    body ? (parsedBody = JSON.parse(body)) : null;
 
-    await getConnection();
-    const BMI = new FunctionConstructor(BMIModel, parsedBody);
+    await getConnection()
+    const BMI = new FunctionConstructor(BMIModel, parsedBody)
 
     switch (httpMethod) {
       case "GET":
         try {
-          const res = await BMI.get();
+          const res = await BMI.get()
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
-          });
+          })
         } catch (err) {
           callback(null, {
             statusCode: 404,
             body: JSON.stringify({ response: null, message: "Not found" }),
-          });
+          })
         }
-        break;
+        break
       case "POST":
         try {
-          const res = await BMI.post();
+          const res = await BMI.post()
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
-          });
+          })
         } catch (err) {
           callback(null, {
             statusCode: 404,
             body: JSON.stringify({ response: null, message: "Not found" }),
-          });
+          })
         }
-        break;
+        break
       case "PATCH":
         try {
-          const res = await BMI.patch();
+          const res = await BMI.patch()
         } catch (err) {
           callback(null, {
             statusCode: 404,
@@ -60,33 +64,33 @@ exports.handler = async (event, context, callback) => {
               response: null,
               message: "Not found",
             }),
-          });
+          })
         }
-        break;
+        break
       case "DELETE":
         try {
-          const res = await BMI.delete();
+          const res = await BMI.delete()
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
-          });
+          })
         } catch (err) {
           callback(null, {
             statusCode: 404,
             body: JSON.stringify({ response: null, message: "Not found" }),
-          });
+          })
         }
-        break;
+        break
       default:
         callback(null, {
           statusCode: 400,
           body: "Bad request",
-        });
+        })
     }
   } else {
     callback(null, {
       statusCode: 401,
       body: "Unauthorized request",
-    });
+    })
   }
-};
+}

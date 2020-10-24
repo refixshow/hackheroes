@@ -1,5 +1,5 @@
 import React from "react"
-import useBMI from "../hooks/useBMI"
+import useBMI from "../hooks/useBMI/useBMI"
 
 const BMI = () => {
   const { data, isError, isLoading, error } = useBMI()

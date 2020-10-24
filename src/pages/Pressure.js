@@ -1,5 +1,5 @@
 import React from "react"
-import usePressure from "../hooks/usePressure"
+import usePressure from "../hooks/usePressure/usePressure"
 
 const Pressure = () => {
   const { data, isError, isLoading, error } = usePressure()

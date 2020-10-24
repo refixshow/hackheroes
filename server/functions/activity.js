@@ -1,34 +1,38 @@
-const getConnection = require("../db/index");
-const ActivityModel = require("../db/models/Activity");
-const FunctionConstructor = require("../helpers/FunctionConstructor");
+const getConnection = require("../db/index")
+const ActivityModel = require("../db/models/Activity")
+const FunctionConstructor = require("../helpers/FunctionConstructor")
 
 exports.handler = async (event, context, callback) => {
-  const { clientContext: user } = context;
+  const { clientContext: user } = context
 
   if (true) {
-    const { httpMethod, body } = event;
-    const params = event.queryStringParameters;
+    const { httpMethod, body } = event
+    const params = event.queryStringParameters
 
-    if (!body && Object.keys(params).length === 0) {
-      callback(null, {
-        statusCode: 400,
-        body: "Bad request",
-      });
+    let parsedBody = {}
+
+    if (Object.keys(params).length === 0) {
+      if (!body) {
+        callback(null, {
+          statusCode: 400,
+          body: "Bad request",
+        })
+      } else {
+        parsedBody = JSON.parse(body)
+      }
     }
-    const parsedBody = {};
-    body ? (parsedBody = JSON.parse(body)) : null;
 
-    await getConnection();
-    const Activity = new FunctionConstructor(ActivityModel, parsedBody, params);
+    await getConnection()
+    const Activity = new FunctionConstructor(ActivityModel, parsedBody, params)
 
     switch (httpMethod) {
       case "GET":
         try {
-          const res = await Activity.get();
+          const res = await Activity.get()
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
-          });
+          })
         } catch (err) {
           callback(null, {
             statusCode: 404,
@@ -36,16 +40,16 @@ exports.handler = async (event, context, callback) => {
               response: null,
               message: "Not Found",
             }),
-          });
+          })
         }
-        break;
+        break
       case "POST":
         try {
-          const res = await Activity.post();
+          const res = await Activity.post()
           callback(null, {
             statusCode: 201,
             body: JSON.stringify({ response: res, message: "OK" }),
-          });
+          })
         } catch (err) {
           callback(null, {
             statusCode: 404,
@@ -53,16 +57,16 @@ exports.handler = async (event, context, callback) => {
               response: null,
               message: "Not found",
             }),
-          });
+          })
         }
-        break;
+        break
       case "PATCH":
         try {
-          const res = await Activity.patch();
+          const res = await Activity.patch()
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
-          });
+          })
         } catch (err) {
           callback(null, {
             statusCode: 404,
@@ -70,16 +74,16 @@ exports.handler = async (event, context, callback) => {
               response: null,
               message: "Not found",
             }),
-          });
+          })
         }
-        break;
+        break
       case "DELETE":
         try {
-          const res = await Activity.delete();
+          const res = await Activity.delete()
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
-          });
+          })
         } catch (err) {
           callback(null, {
             statusCode: 404,
@@ -87,19 +91,19 @@ exports.handler = async (event, context, callback) => {
               response: null,
               message: "Not found",
             }),
-          });
+          })
         }
-        break;
+        break
       default:
         callback(null, {
           statusCode: 400,
           body: "Bad request",
-        });
+        })
     }
   } else {
     callback(null, {
       statusCode: 401,
       body: "Unauthorized request",
-    });
+    })
   }
-};
+}
