@@ -17,6 +17,9 @@ exports.handler = async (event, context, callback) => {
     }
     const parsedBody = body ? JSON.parse(body) : {};
 
+    if (Object.keys(params).length === 0) {
+    }
+
     await getConnection();
     const Activity = new FunctionConstructor(ActivityModel, parsedBody, params);
 
