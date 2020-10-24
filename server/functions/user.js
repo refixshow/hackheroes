@@ -16,8 +16,7 @@ exports.handler = async (event, context, callback) => {
         body: "Bad request",
       });
     }
-    const parsedBody = {};
-    body ? (parsedBody = JSON.parse(body)) : null;
+    const parsedBody = body ? JSON.parse(body) : {};
 
     await getConnection();
     const User = new FunctionConstructor(UserModel, parsedBody);

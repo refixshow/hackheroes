@@ -25,7 +25,7 @@ class FunctionConstructor {
     return this.model.updateOne({ _id: object_id }, data);
   };
   delete = () => {
-    const { object_id } = this.body;
+    const { object_id } = this.params;
     return this.model.deleteOne({ _id: object_id });
   };
 }
