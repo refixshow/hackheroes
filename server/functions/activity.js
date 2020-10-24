@@ -63,6 +63,8 @@ exports.handler = async (event, context, callback) => {
       case "PATCH":
         try {
           const res = await Activity.patch()
+
+          console.log(res, "THAT THE HELL")
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),

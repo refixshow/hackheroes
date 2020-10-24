@@ -9,16 +9,21 @@ exports.handler = async (event, context, callback) => {
     const { httpMethod, body } = event
     const params = event.queryStringParameters
 
-    if (!body && Object.keys(params).length === 0) {
-      callback(null, {
-        statusCode: 400,
-        body: "Bad request",
-      })
+    let parsedBody = {}
+
+    if (Object.keys(params).length === 0) {
+      if (!body) {
+        callback(null, {
+          statusCode: 400,
+          body: "Bad request",
+        })
+      } else {
+        parsedBody = JSON.parse(body)
+      }
     }
-    const parsedBody = body ? JSON.parse(body) : {}
 
     await getConnection()
-    const Pressure = new FunctionConstructor(PressureModel, parsedBody)
+    const Pressure = new FunctionConstructor(PressureModel, parsedBody, params)
 
     switch (httpMethod) {
       case "GET":

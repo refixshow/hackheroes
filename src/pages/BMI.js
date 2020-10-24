@@ -1,18 +1,18 @@
 import React from "react"
-import useBMI from "../hooks/useBMI/useBMI"
+// import useBMI from "../hooks/useBMI/useBMI"
 
 const BMI = () => {
-  const { data, isError, isLoading, error } = useBMI()
+  // const { data, isError, isLoading, error } = useBMI()
 
-  if (isError) {
-    return <div>{error}</div>
-  }
+  // if (isError) {
+  //   return <div>{error}</div>
+  // }
 
-  if (isLoading) {
-    return <div>is Loading</div>
-  }
+  // if (isLoading) {
+  //   return <div>is Loading</div>
+  // }
 
-  return <div>{JSON.stringify(data, null, 2)}</div>
+  return <div>BMI</div>
 }
 
 export default BMI

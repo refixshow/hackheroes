@@ -23,7 +23,7 @@ exports.handler = async (event, context, callback) => {
     }
 
     await getConnection()
-    const BMI = new FunctionConstructor(BMIModel, parsedBody)
+    const BMI = new FunctionConstructor(BMIModel, parsedBody, params)
 
     switch (httpMethod) {
       case "GET":

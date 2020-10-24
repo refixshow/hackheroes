@@ -1,5 +1,6 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { ReactQueryDevtools } from "react-query-devtools"
 
 import "react-netlify-identity-widget/styles.css"
 import "@reach/tabs/styles.css"
@@ -13,6 +14,7 @@ const App = () => {
   return (
     <div>
       <IdentityModalContextProvider>
+        <ReactQueryDevtools initialIsOpen />
         <Router>
           <Switch>
             <Route exact path="/" component={Home} />
