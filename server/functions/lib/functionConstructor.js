@@ -5,8 +5,11 @@ class FunctionConstructor {
   }
 
   get = () => {
-    const { user_id } = this.body;
-    return this.model.find({ user_id });
+    const { user_id, email } = this.body;
+    if (!email) {
+      return this.model.find({ user_id });
+    }
+    return this.model.find({ email });
   };
   post = () => {
     const { user_id, ...data } = this.body;
