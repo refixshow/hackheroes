@@ -5,3 +5,4 @@ export { default as BMI } from "./BMI";
 export { default as Pressure } from "./Pressure";
 export { default as Covid19 } from "./Covid19";
 export { default as User } from "./User";
+export { default as Settings } from "./Settings/Settings";
