@@ -1,3 +1,24 @@
 .active {
-  background-color: blue;
+  opacity: 1;
+}
+
+.btn {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  opacity: 0.6;
+}
+
+.icon {
+  width: 80%;
+  height: 80%;
+  display: inline-block;
+}
+
+.desc {
+  text-align: center;
+  color: var(--background);
+  margin: 0.5em 0;
+  transition: all 0.3s ease-in-out;
 }
