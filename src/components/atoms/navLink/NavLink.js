@@ -1,19 +1,18 @@
-import React from "react"
-import { Link, useLocation } from "react-router-dom"
-import Icon from "../icon/Icon"
-import style from "./NavLink.module.scss"
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import Icon from "../icon/Icon";
+import style from "./NavLink.module.scss";
 
 const RouterLink = ({ to, children, icon }) => {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
 
   return (
     <div className={`${style.btn} ${pathname === to ? style.active : ""}`}>
       <Link to={to}>
         <Icon src={icon} className={style.icon} />
-        {pathname === to ? <p className={style.desc}>{children}</p> : null}
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default RouterLink
+export default RouterLink;

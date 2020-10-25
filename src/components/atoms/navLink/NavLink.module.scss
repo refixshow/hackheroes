@@ -1,5 +1,7 @@
 .active {
-  opacity: 1;
+  &.btn {
+    opacity: 1;
+  }
 
   & a {
     text-decoration: none;
@@ -7,22 +9,14 @@
 }
 
 .btn {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   text-align: center;
-  transition: all 0.3s ease-in-out;
-  opacity: 0.6;
+  opacity: 0.5;
+  transition: all 0.2s ease-in-out;
 }
 
 .icon {
-  width: 80%;
-  height: 80%;
-  display: inline-block;
-}
-
-.desc {
-  text-align: center;
-  color: var(--background);
-  margin: 0.5em 0;
-  transition: all 0.3s ease-in-out;
+  width: 100%;
+  height: 100%;
 }
