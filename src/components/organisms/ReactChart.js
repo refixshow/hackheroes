@@ -6,7 +6,6 @@ import { queryCache } from "react-query"
 
 const ReactChart = ({ queryKey, endPointName }) => {
   const user = queryCache.getQueryData("user")
-  //  TO CHANGE
 
   const { isLoading, isError, data, error, isSuccess } = useEndPoint({
     type: "GET",

@@ -1,6 +1,3 @@
-// Index.js for DB
-// Checks if database connection is already established
-// IF NOT connects to database
 const mongoose = require("mongoose")
 
 let cachedDB = null
@@ -13,11 +10,6 @@ const getConnection = async () => {
       useUnifiedTopology: true,
     })
   }
-
-  console.log(
-    cachedDB,
-    "IS CONNECTING -----------------------------------------"
-  )
   return cachedDB
 }
 
