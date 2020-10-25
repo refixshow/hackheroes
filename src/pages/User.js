@@ -1,8 +1,8 @@
-import React from "react"
+import React from "react";
 // import { useIdentityContext } from "react-netlify-identity-widget"
-import { Redirect } from "react-router-dom"
-import useEndPoint from "../hooks/useEndPoint"
-import CreateUserForm from "../components/molecules/createUserForm/CreateUserForm"
+import { Redirect } from "react-router-dom";
+import useEndPoint from "../hooks/useEndPoint";
+import CreateUserForm from "../components/molecules/createUserForm/CreateUserForm";
 
 const User = () => {
   // const { user } = useIdentityContext()
@@ -16,7 +16,7 @@ const User = () => {
       endPointName: "user",
       params: { email: "email" },
     },
-  })
+  });
 
   const [createUser] = useEndPoint({
     type: "POST",
@@ -24,25 +24,23 @@ const User = () => {
       queryKey: "user",
       endPointName: "user",
     },
-  })
+  });
 
   if (data) {
     if (data.length > 0) {
-      return <Redirect to="activities" />
+      return <Redirect to='activities' />;
     }
   }
 
   if (error) {
-    return <div>{error.message}</div>
+    return <div>{error.message}</div>;
   }
 
   if (isLoading) {
-    return <div>loading...</div>
+    return <div>loading...</div>;
   }
   //      email={user.email} name={user.user_metadata.full_name}
-  return (
-    <CreateUserForm createUser={createUser} email={"email"} name={"name"} />
-  )
-}
+  return <CreateUserForm createUser={createUser} email={"email"} name={"name"} />;
+};
 
-export default User
+export default User;
