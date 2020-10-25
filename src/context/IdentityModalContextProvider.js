@@ -25,7 +25,7 @@ const IdentityModalContextProvider = ({ children }) => {
 
   const handleOnLogin = useCallback(() => {
     history.push("/activity")
-  }, [])
+  }, [history])
 
   return (
     <IdentityContextProvider url={url}>
