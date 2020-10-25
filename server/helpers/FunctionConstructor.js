@@ -7,9 +7,13 @@ class FunctionConstructor {
 
   get = () => {
     const { user_id, email } = this.params
+    console.log("step 6", this)
     if (!user_id) {
+      const x = this.model.find({ email })
+      console.log(x, "step 7")
       return this.model.find({ email })
     }
+
     return this.model.find({ user_id })
   }
   post = () => {
