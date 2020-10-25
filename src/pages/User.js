@@ -7,7 +7,7 @@ import CreateUserForm from "../components/molecules/createUserForm/CreateUserFor
 const User = () => {
   const { user } = useIdentityContext()
 
-  const { isLoading, data, error, isSuccess } = useEndPoint({
+  const { isLoading, data, error } = useEndPoint({
     type: "GET",
     payload: {
       queryKey: "user",
@@ -24,7 +24,7 @@ const User = () => {
     },
   })
 
-  if (isSuccess) {
+  if (data) {
     if (data.length > 0) {
       return <Redirect to="activities" />
     }
