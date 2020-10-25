@@ -30,7 +30,7 @@ const AddBMI = () => {
         date: timeSetter({ type: "MAKE_ISO_DATE", date: longDate }),
       })
     },
-    [addBMI, longDate, weight, height]
+    [addBMI, longDate, weight, height, bmi]
   )
 
   const handleHeightChange = useCallback((e) => {
@@ -47,20 +47,15 @@ const AddBMI = () => {
           type="number"
           required
           onChange={handleHeightChange}
-          placeholder="Ciśnienie skurczowe"
+          placeholder="Waga [kg]"
         />
         <input
           type="number"
           required
           onChange={handleWeightChange}
-          placeholder="Ciśnienie rozkurczowe"
+          placeholder="Wzrost [cm]"
         />
-        <input
-          type="submit"
-          className={style.btn}
-          value="save"
-          placeholder="Twój puls [/min]"
-        />
+        <input type="submit" className={style.btn} value="save" />
       </form>
     </div>
   )
