@@ -1,11 +1,10 @@
 const getConnection = require("../db/index")
 const UserModel = require("../db/models/user")
 const FunctionConstructor = require("../helpers/FunctionConstructor")
+const fetchh = require("node-fetch")
 
 exports.handler = async (event, context, callback) => {
   const { clientContext: user } = context
-
-  console.log("step 1")
 
   if (true) {
     const { httpMethod, body } = event
@@ -24,19 +23,13 @@ exports.handler = async (event, context, callback) => {
       }
     }
 
-    console.log("step 2")
-
     await getConnection()
     const User = new FunctionConstructor(UserModel, parsedBody, params)
 
-    console.log("step 3")
-
     switch (httpMethod) {
       case "GET":
-        console.log("step 4")
         try {
           const res = await User.get()
-          console.log("step 5")
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),
