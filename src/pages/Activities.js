@@ -1,16 +1,15 @@
-import React from "react";
-import ReactChart from "../components/organisms/ReactChart";
+import React from "react"
+import ReactChart from "../components/organisms/ReactChart"
+import ChartWrapper from "../components/atoms/chartWrapper/ChartWrapper"
 
 const Activities = () => {
   return (
-    <main
-      style={{
-        width: "800px",
-        height: "600px",
-      }}>
-      <ReactChart queryKey='activities' endPointName='activity' />
+    <main>
+      <ChartWrapper>
+        <ReactChart queryKey="activities" endPointName="activity" />
+      </ChartWrapper>
     </main>
-  );
-};
+  )
+}
 
-export default Activities;
+export default Activities

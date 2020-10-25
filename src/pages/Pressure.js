@@ -1,16 +1,15 @@
 import React from "react"
+
 import ReactChart from "../components/organisms/ReactChart"
+import ChartWrapper from "../components/atoms/chartWrapper/ChartWrapper"
 
 const Pressure = () => {
   return (
-    <div
-      style={{
-        width: "800px",
-        height: "600px",
-      }}
-    >
-      <ReactChart queryKey="pressure" endPointName="pressure" />
-    </div>
+    <main>
+      <ChartWrapper>
+        <ReactChart queryKey="pressure" endPointName="pressure" />
+      </ChartWrapper>
+    </main>
   )
 }
 
