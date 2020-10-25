@@ -13,9 +13,7 @@ const Activities = () => {
 
   return (
     <main>
-      <ActionCreator
-        setActive={{ type: "activities", payload: { setActive } }}
-      />
+      <ActionCreator active={active} setActive={setActive} />
       <div className={styles.wrapper}>
         {active.chart && (
           <ReactChart queryKey="activities" endPointName="activity" />

@@ -1,16 +1,26 @@
-import React from "react"
+import React, { useCallback } from "react"
 import style from "./ActionCreator.module.scss"
 
-import { queryCache } from "react-query"
+const ActionCreator = ({ active, setActive }) => {
+  const handleChartChange = useCallback(() => {
+    setActive({ chart: true, history: false, add: false })
+  }, [setActive])
+  const handleHistoryChange = useCallback(() => {
+    setActive({ chart: false, history: true, add: false })
+  }, [setActive])
+  const handleAddChange = useCallback(() => {
+    setActive({ chart: false, history: false, add: true })
+  }, [setActive])
 
-const ActionCreator = ({ type, payload }) => {
   return (
     <header className={style.wrapper}>
       <span>title</span>
       <div>
-        <div>---chart</div>
-        <div>---history</div>
-        <div>---add</div>
+        {!active.chart && <button onClick={handleChartChange}>---chart</button>}
+        {!active.history && (
+          <button onClick={handleHistoryChange}>---history</button>
+        )}
+        {!active.add && <button onClick={handleAddChange}>---add</button>}
       </div>
     </header>
   )
