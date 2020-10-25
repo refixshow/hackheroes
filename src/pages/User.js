@@ -1,15 +1,20 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { useIdentityContext } from "react-netlify-identity-widget"
 import { Redirect } from "react-router-dom"
 import useEndPoint from "../hooks/useEndPoint"
+import CreateUserForm from "../components/molecules/createUserForm/CreateUserForm"
 
 const User = () => {
-  const { isLoading, isError, data, error, isSuccess } = useEndPoint({
+  const { user } = useIdentityContext()
+
+  console.log(user)
+
+  const { isLoading, data, error, isSuccess } = useEndPoint({
     type: "GET",
     payload: {
       queryKey: "user",
       endPointName: "user",
-      params: { user_id: "1" },
+      params: { email: user.email },
     },
   })
 
@@ -18,25 +23,30 @@ const User = () => {
     payload: {
       queryKey: "user",
       endPointName: "user",
-      params: { user_id: "1" },
     },
   })
 
-  console.log(data)
+  if (isSuccess) {
+    if (data.length > 0) {
+      return <Redirect to="activities" />
+    }
+  }
 
-  // const { user } = useIdentityContext()
+  if (error) {
+    return <div>{error.message}</div>
+  }
 
-  // console.log(user)
+  if (isLoading) {
+    return <div>loading...</div>
+  }
 
-  // useEffect(() => {
-  //   if (data) {
-  //     if (data.length === 0) {
-  //       createUser({ email: "email", name: "name" })
-  //     }
-  //   }
-  // }, [data])
-
-  return <div>user</div>
+  return (
+    <CreateUserForm
+      createUser={createUser}
+      email={user.email}
+      name={user.name}
+    />
+  )
 }
 
 export default User
