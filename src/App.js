@@ -16,8 +16,8 @@ import "./App.modules.scss"
 const App = () => {
   return (
     <AppTemplate>
+      {/* <ReactQueryDevtools initialIsOpen /> */}
       <IdentityModalContextProvider>
-        {/* <ReactQueryDevtools initialIsOpen /> */}
         <Router>
           <div>action creator</div>
           <Switch>
