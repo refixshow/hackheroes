@@ -3,14 +3,14 @@ import ReactChart from "../components/organisms/ReactChart"
 
 const Activities = () => {
   return (
-    <div
+    <main
       style={{
         width: "800px",
         height: "600px",
       }}
     >
       <ReactChart queryKey="activities" endPointName="activity" />
-    </div>
+    </main>
   )
 }
 

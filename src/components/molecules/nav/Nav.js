@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import style from "./Nav.module.scss"
 // import { useIdentityContext } from "react-netlify-identity-widget"
 
 const Nav = () => {
@@ -7,7 +8,7 @@ const Nav = () => {
 
   if (true) {
     return (
-      <nav>
+      <nav className={style.navigation}>
         <Link to="/activities">activities</Link>
         <br></br>
         <Link to="/bmi">bmi</Link>

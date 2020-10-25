@@ -6,6 +6,9 @@ html {
 }
 
 body {
+  max-height: 100vh;
+  max-width: 100vw;
+  overflow: hidden;
   font-size: 1.6rem;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
