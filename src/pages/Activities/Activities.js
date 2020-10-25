@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import ReactChart from "../../components/organisms/ReactChart"
 import AddActivity from "../../components/molecules/addActivity/AddActivity"
 import ActionCreator from "../../components/organisms/actionCreator/ActionCreator"
-import ActivityHistory from "../../components/organisms/ActivitiesHistory/ActivitiesHistory"
+import ActivitiesHistory from "../../components/organisms/ActivitiesHistory/ActivitiesHistory"
 import styles from "./Activities.module.scss"
 
 const Activities = () => {
@@ -10,16 +10,18 @@ const Activities = () => {
     chart: true,
     history: false,
     add: false,
+    delete: false,
+    update: false,
   })
 
   return (
     <main>
-      <ActionCreator active={active} setActive={setActive} />
+      <ActionCreator active={active} setActive={setActive} title="Activities" />
       <div className={styles.wrapper}>
         {active.chart && (
           <ReactChart queryKey="activities" endPointName="activity" />
         )}
-        {active.history && <ActivityHistory />}
+        {active.history && <ActivitiesHistory />}
         {active.add && <AddActivity />}
       </div>
     </main>

@@ -2,19 +2,16 @@ import React from "react"
 import { queryCache } from "react-query"
 import time from "../../../helpers/time"
 
-import {} from "../../../hooks/useEndPoint"
-
-const ActivitiesHistory = () => {
-  const activities = queryCache.getQueryData("activities")
-
+const PressureHistory = () => {
+  const pressure = queryCache.getQueryData("pressure")
   return (
     <div>
       <div>
-        {activities.map((el) => (
+        {pressure.map((el) => (
           <details key={el._id}>
             <summary>{time({ type: "MAKE_LONG_DATE", date: el.date })}</summary>
-            <span>type: {el.type}</span>
-            <span>length: {el.length}</span>
+            <span>sys_pressure: {el.sys_pressure}</span>
+            <span>dias_pressure: {el.dias_pressure}</span>
             <span>pulse: {el.pulse}</span>
           </details>
         ))}
@@ -23,4 +20,4 @@ const ActivitiesHistory = () => {
   )
 }
 
-export default ActivitiesHistory
+export default PressureHistory
