@@ -2,11 +2,11 @@
   grid-row: 3;
 
   display: flex;
-}
-
-.navigationNone {
-  display: flex;
   background-color: var(--base-color);
   padding: var(--padding-narrow);
   justify-content: space-between;
+}
+
+.navigationNone {
+  display: none;
 }
