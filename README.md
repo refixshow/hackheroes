@@ -1,23 +1,25 @@
 Projekt konkursowy [HackHeroes](http://hackheroes.pl/).
 
-# nazwa produkcyjna: "banan"
+# Health Companion
 
-Projekt aplikacji webowej, pomagającej znaleźć towarzyszy do wspólnego ćwiecznia różnych dyscyplin sportowych.
+![Strona logowania aplikacji](/readmeImages/loginPage.png)
+
+Projekt aplikacji webowej pomagającej monitorować: stan zdrowia w przypadku problemów z ciśnieniem tętniczym, różnego rodzaju aktywności fizyczne oraz poziom BMI.
 
 ## Cel aplikacji
 
-Celem aplikacji jest promowanie sportu i zdrowego trybu życia, głównie wśród młodzieży.
+Celem aplikacji jest pomoc w monitorowaniu stanu zdrowia użytkownika obciążonego chorobą nadciśnieniową.
 
-Aplikacja pozwalałaby na:
+Aplikacja pozwala na:
 
--   ułatwienie stawianie pierwszych kroków w sporcie, dzięki współpracy "świeżaków" z bardziej doświadczonymi sportowcami, chcącymi podzielić się swoją wiedzą i doświadczeniem,
--   nawiązywanie nowych znajomości z innymi sportowcami,
--   organizację lokalnych wydarzeń sportowych
+- notowanie wyników pomiarów ciśnieniomierza,
+- sprawdzanie i zapisywanie wyników BMI,
+- notowanie podejmowanych aktywności fizycznych
 
-## Technologie
+## Użyte technologie
 
 Aplikacja została stworzona w oparciu o najnowsze technologie webowe, tj. :
 
--   serverless backend, dzięki Netlify,
--   nowoczesny frontend z wykorzystaniem React'a,
--   bezrelacyjna baza danych - MongoDB,
+- serverless backend - Netlify,
+- frontend - React.js,
+- baza danych - MongoDB,
