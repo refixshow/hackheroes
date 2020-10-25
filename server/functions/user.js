@@ -1,5 +1,5 @@
 const getConnection = require("../db/index")
-const UserModel = require("../db/models/User")
+const UserModel = require("../db/models/user")
 const FunctionConstructor = require("../helpers/FunctionConstructor")
 
 exports.handler = async (event, context, callback) => {

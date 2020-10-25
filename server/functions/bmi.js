@@ -1,5 +1,5 @@
 const getConnection = require("../db/index")
-const BMIModel = require("../db/models/Bmi")
+const BMIModel = require("../db/models/bmi")
 const FunctionConstructor = require("../helpers/FunctionConstructor")
 
 exports.handler = async (event, context, callback) => {

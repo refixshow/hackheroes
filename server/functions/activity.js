@@ -1,5 +1,5 @@
 const getConnection = require("../db/index")
-const ActivityModel = require("../db/models/Activity")
+const ActivityModel = require("../db/models/activity")
 const FunctionConstructor = require("../helpers/FunctionConstructor")
 
 exports.handler = async (event, context, callback) => {

@@ -1,5 +1,5 @@
 const getConnection = require("../db/index")
-const PressureModel = require("../db/models/Pressure")
+const PressureModel = require("../db/models/pressure")
 const FunctionConstructor = require("../helpers/FunctionConstructor")
 
 exports.handler = async (event, context, callback) => {
