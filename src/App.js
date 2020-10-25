@@ -17,7 +17,7 @@ const App = () => {
   return (
     <AppTemplate>
       <IdentityModalContextProvider>
-        <ReactQueryDevtools initialIsOpen />
+        {/* <ReactQueryDevtools initialIsOpen /> */}
         <Router>
           <div>action creator</div>
           <Switch>
