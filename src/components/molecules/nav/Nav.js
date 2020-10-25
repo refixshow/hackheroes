@@ -1,15 +1,25 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import style from "./Nav.module.scss"
 // import { useIdentityContext } from "react-netlify-identity-widget"
 
 const Nav = () => {
   // const { isLoggedIn } = useIdentityContext()
 
+  const location = useLocation()
+
   if (true) {
     return (
-      <nav className={style.navigation}>
-        <Link to="/activities">activities</Link>
+      <nav
+        className={
+          location.pathname === "/" || location.pathname === "/user"
+            ? style.navigationNone
+            : style.navigation
+        }
+      >
+        <Link className="xd" to="/activities">
+          activities
+        </Link>
         <br></br>
         <Link to="/bmi">bmi</Link>
         <br></br>
