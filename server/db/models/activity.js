@@ -1,14 +1,14 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const activitySchema = new mongoose.Schema({
   user_id: String,
   type: String,
   length: Number,
   time: Number,
-  calories: Number,
+  pulse: Number,
   date: Date,
-})
+});
 
-const ActivityModel = mongoose.model("Activity", activitySchema)
+const ActivityModel = mongoose.model("Activity", activitySchema);
 
-module.exports = ActivityModel
+module.exports = ActivityModel;
