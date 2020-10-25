@@ -10,7 +10,7 @@ class FunctionConstructor {
     console.log("step 6", this)
     if (!user_id) {
       const x = this.model.find({ email })
-      console.log(x, "step 7")
+      console.log("step 7", x)
       return this.model.find({ email })
     }
 
