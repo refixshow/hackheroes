@@ -43,10 +43,12 @@ export default function ({ type, payload }) {
 
             const prevState = queryCache.getQueryData(payload.queryKey)
 
-            queryCache.setQueryData(payload.queryKey, (oldState) => [
-              ...oldState,
-              newValue,
-            ])
+            queryCache.setQueryData(payload.queryKey, (oldState) => {
+              if (oldState) {
+                return [...oldState, newValue]
+              }
+              return [newValue]
+            })
 
             return () => queryCache.setQueryData(payload.queryKey, prevState)
           },

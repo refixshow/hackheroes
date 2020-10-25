@@ -12,10 +12,10 @@ export default function fillData({ type, data }) {
           })),
         },
         {
-          label: "Calories",
+          label: "Pulse",
           data: data.map((el) => ({
             x: time({ type: "MAKE_SHORT_DATE", date: el.date }),
-            y: el.calories,
+            y: el.pulse,
           })),
         },
         {
