@@ -30,10 +30,9 @@ exports.handler = async (event, context, callback) => {
         try {
           const res = await User.get()
 
-          console.log(res, "RESPKURWAPONSE ----------------------------------")
           callback(null, {
             statusCode: 200,
-            body: JSON.stringify({ response: res, message: "OK" }),
+            body: "helo?",
           })
         } catch (err) {
           callback(null, {
