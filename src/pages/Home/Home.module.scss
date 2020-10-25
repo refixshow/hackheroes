@@ -15,6 +15,19 @@
   display: block;
   margin: 0 auto;
   fill: var(--base-color);
+  animation: beatingHeart 2s ease-in-out infinite;
+}
+
+@keyframes beatingHeart {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(0.9);
+  }
 }
 
 .header {
