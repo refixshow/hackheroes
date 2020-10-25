@@ -1,9 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { useIdentityContext } from "react-netlify-identity-widget"
+// import { useIdentityContext } from "react-netlify-identity-widget"
 
 const Nav = () => {
-  const { isLoggedIn } = useIdentityContext()
+  // const { isLoggedIn } = useIdentityContext()
 
   if (true) {
     return (
