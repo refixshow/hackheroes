@@ -1,0 +1,57 @@
+$fontWeights: (
+  regular: 400,
+  medium: 500,
+  bold: 700,
+);
+
+$colors: (
+  base-color: #f24343,
+  dark-color: #2c2c2c,
+  red-color: #e50000,
+  background: #f2f2f2,
+);
+
+$fontSizes: (
+  xxs: "1.2rem",
+  xs: "1.4rem",
+  s: "1.6rem",
+  m: "2rem",
+  l: "2.4rem",
+  xl: "3.6rem",
+  xxl: "5.6rem",
+);
+
+$padding: (
+  xsmall: ".6rem",
+  small: "1rem",
+  narrow: "1.5rem",
+  regular: "2rem",
+  big: "3.6rem",
+);
+
+$borderRadius: (
+  small: ".5rem",
+  medium: "2rem",
+);
+
+:root {
+  @each $variable, $value in $colors {
+    --#{$variable}: #{$value};
+  }
+
+  @each $variable, $value in $fontSizes {
+    --#{$variable}: #{$value};
+  }
+
+  @each $variable, $value in $fontWeights {
+    --#{$variable}: #{$value};
+  }
+
+  @each $variable, $value in $padding {
+    --padding-#{$variable}: #{$value};
+  }
+
+  @each $variable, $value in $borderRadius {
+    --radius-#{$variable}: #{$value};
+  }
+}

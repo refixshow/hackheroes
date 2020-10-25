@@ -1,0 +1,13 @@
+@import "./styles/reset";
+@import "./styles/variables";
+
+html {
+  font-size: 62.5%; // 1rem => 10px
+}
+
+body {
+  font-size: 1.6rem;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--background);
+}
