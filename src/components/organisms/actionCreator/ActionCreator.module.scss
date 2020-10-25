@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--padding-narrow) 2rem;
+  background-color: var(--base-color);
+
+  & > div {
+    display: flex;
+  }
+}
