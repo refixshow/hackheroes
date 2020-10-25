@@ -6,7 +6,10 @@ const RouterLink = ({ to, children }) => {
   const { pathname } = useLocation()
 
   return (
-    <Link className={pathname === to ? style.active : ""} to={to}>
+    <Link
+      className={`${style.self} ${pathname === to ? style.active : ""}`}
+      to={to}
+    >
       {children}
     </Link>
   )
