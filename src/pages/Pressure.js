@@ -7,9 +7,9 @@ import AddPressure from "../components/molecules/addPressure/AddPressure";
 
 const Pressure = () => {
   const [active, setActive] = useState({
-    chart: false,
+    chart: true,
     history: false,
-    add: true,
+    add: false,
   });
 
   return (
