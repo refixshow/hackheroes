@@ -68,7 +68,7 @@ export default function ({ type, payload }) {
             .then((res) => res.data),
         {
           onSettled: () => {
-            queryCache.invalidateQueries("activities")
+            queryCache.invalidateQueries(payload.queryKey)
           },
         }
       )

@@ -30,14 +30,6 @@ const ActionCreator = ({ active, setActive, title }) => {
       update: false,
     })
   }, [setActive])
-  const handleUpdateChange = useCallback(() => {
-    setActive({
-      chart: false,
-      history: false,
-      add: false,
-      update: true,
-    })
-  }, [setActive])
 
   return (
     <header className={style.wrapper}>
