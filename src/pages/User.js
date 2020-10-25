@@ -7,8 +7,6 @@ import CreateUserForm from "../components/molecules/createUserForm/CreateUserFor
 const User = () => {
   const { user } = useIdentityContext()
 
-  console.log(user)
-
   const { isLoading, data, error, isSuccess } = useEndPoint({
     type: "GET",
     payload: {
@@ -44,7 +42,7 @@ const User = () => {
     <CreateUserForm
       createUser={createUser}
       email={user.email}
-      name={user.name}
+      name={user.user_metadata.full_name}
     />
   )
 }
