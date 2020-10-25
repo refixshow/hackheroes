@@ -5,12 +5,13 @@ import time from "../../../helpers/time"
 import useEndPoint from "../../../hooks/useEndPoint"
 
 const ActivitiesHistory = () => {
+  const [active, setActive] = useState(false)
   const activities = queryCache.getQueryData("activities")
 
-  const [deleteActivity] = useEndPoint({
-    type: "DELETE",
-    payload: { endPointName: "activity" },
-  })
+  const handleDetails = (e) => {
+    active ? setActive(false) : setActive(true)
+    console.log(active)
+  }
 
   return (
     <div>
