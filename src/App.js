@@ -12,7 +12,7 @@ import ActionCreator from "./components/organisms/actionCreator/ActionCreator"
 
 import "react-netlify-identity-widget/styles.css"
 import "@reach/tabs/styles.css"
-import "./App.modules.scss"
+import "./App.module.scss"
 
 const App = () => {
   return (

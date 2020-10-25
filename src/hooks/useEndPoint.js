@@ -38,18 +38,18 @@ export default function ({ type, payload }) {
             )
             .then((res) => res.data),
         {
-          onMutate: (newValue) => {
-            queryCache.cancelQueries(payload.queryKey)
+          // onMutate: (newValue) => {
+          //   queryCache.cancelQueries(payload.queryKey)
 
-            const prevState = queryCache.getQueryData(payload.queryKey)
+          //   const prevState = queryCache.getQueryData(payload.queryKey)
 
-            queryCache.setQueryData(payload.queryKey, (oldState) => [
-              ...oldState,
-              newValue,
-            ])
+          //   queryCache.setQueryData(payload.queryKey, (oldState) => [
+          //     ...oldState,
+          //     newValue,
+          //   ])
 
-            return () => queryCache.setQueryData(payload.queryKey, prevState)
-          },
+          //   return () => queryCache.setQueryData(payload.queryKey, prevState)
+          // },
 
           onSettled: () => {
             queryCache.invalidateQueries(payload.queryKey)
