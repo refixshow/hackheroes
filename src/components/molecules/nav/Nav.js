@@ -1,38 +1,33 @@
 import React from "react"
-import { Link, useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import style from "./Nav.module.scss"
-// import { useIdentityContext } from "react-netlify-identity-widget"
+import NavLink from "../../atoms/navLink/NavLink"
+import { queryCache } from "react-query"
 
 const Nav = () => {
-  // const { isLoggedIn } = useIdentityContext()
-
   const location = useLocation()
 
-  if (true) {
-    return (
-      <nav
-        className={
-          location.pathname === "/" || location.pathname === "/user"
-            ? style.navigationNone
-            : style.navigation
-        }
-      >
-        <Link className="xd" to="/activities">
-          activities
-        </Link>
-        <br></br>
-        <Link to="/bmi">bmi</Link>
-        <br></br>
-        <Link to="/pressure">pressure</Link>
-        <br></br>
-        <Link to="/covid19">Covid</Link>
-        <br></br>
-        <Link to="/user">user</Link>
-      </nav>
-    )
-  }
+  const user = queryCache.getQueryData("user")
 
-  return null
+  return (
+    <nav
+      className={
+        location.pathname === "/" || location.pathname === "/user"
+          ? style.navigationNone
+          : style.navigation
+      }
+    >
+      <NavLink to="/activities">activities</NavLink>
+      <br></br>
+      <NavLink to="/bmi">bmi</NavLink>
+      <br></br>
+      <NavLink to="/pressure">pressure</NavLink>
+      <br></br>
+      <NavLink to="/covid19">Covid</NavLink>
+      <br></br>
+      <NavLink to="/user">user</NavLink>
+    </nav>
+  )
 }
 
 export default Nav
