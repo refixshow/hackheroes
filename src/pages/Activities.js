@@ -5,9 +5,9 @@ import AddActivity from "../components/molecules/addActivity/AddActivity"
 
 const Activities = () => {
   const [active, setActive] = useState({
-    chart: true,
+    chart: false,
     history: false,
-    add: false,
+    add: true,
   })
 
   return (
