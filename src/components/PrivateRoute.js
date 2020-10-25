@@ -1,13 +1,13 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
-import { useIdentityContext } from "react-netlify-identity-widget"
+// import { useIdentityContext } from "react-netlify-identity-widget"
 import { queryCache } from "react-query"
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isLoggedIn } = useIdentityContext()
   const user = queryCache.getQueryData("user")
 
-  if (isLoggedIn) {
+  // const { isLoggedIn } = useIdentityContext()
+  if (true) {
     if (user) {
       return (
         <Route

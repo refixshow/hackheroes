@@ -19,10 +19,10 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/user" component={User} />
-            <Route path="/activities" component={Activities} />
+            <PrivateRoute path="/activities" component={Activities} />
             <PrivateRoute path="/pressure" component={Pressure} />
-            <Route path="/bmi" component={BMI} />
-            <Route path="/covid19" component={Covid19} />
+            <PrivateRoute path="/bmi" component={BMI} />
+            <PrivateRoute path="/covid19" component={Covid19} />
             <Route path="/*" component={Error} />
           </Switch>
           <Nav />
