@@ -2,10 +2,15 @@ import React from "react"
 import { queryCache } from "react-query"
 import time from "../../../helpers/time"
 
-import {} from "../../../hooks/useEndPoint"
+import useEndPoint from "../../../hooks/useEndPoint"
 
 const ActivitiesHistory = () => {
   const activities = queryCache.getQueryData("activities")
+
+  const [deleteActivity] = useEndPoint({
+    type: "DELETE",
+    payload: { endPointName: "activity" },
+  })
 
   return (
     <div>
