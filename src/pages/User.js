@@ -12,7 +12,7 @@ const User = () => {
     payload: {
       queryKey: "user",
       endPointName: "user",
-      params: { email: user.email },
+      params: { email: "email" },
     },
   })
 
@@ -39,11 +39,7 @@ const User = () => {
   }
 
   return (
-    <CreateUserForm
-      createUser={createUser}
-      email={user.email}
-      name={user.user_metadata.full_name}
-    />
+    <CreateUserForm createUser={createUser} email={"email"} name={"name"} />
   )
 }
 

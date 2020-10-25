@@ -7,12 +7,14 @@ import { queryCache } from "react-query"
 const ReactChart = ({ queryKey, endPointName }) => {
   const user = queryCache.getQueryData("user")
 
+  // user[0].email TO CHANGE
+
   const { isLoading, isError, data, error, isSuccess } = useEndPoint({
     type: "GET",
     payload: {
       queryKey,
       endPointName,
-      params: { user_id: user[0].email },
+      params: { user_id: "1" },
     },
   })
 
