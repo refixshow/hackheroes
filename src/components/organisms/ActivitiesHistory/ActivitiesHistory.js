@@ -1,23 +1,37 @@
-import React from "react"
-import { queryCache } from "react-query"
-import time from "../../../helpers/time"
+import React, { useState } from "react";
+import { act } from "react-dom/test-utils";
+import { queryCache } from "react-query";
+import time from "../../../helpers/time";
+import style from "./ActivitiesHistory.module.scss";
+import Icon from "../../atoms/icon/Icon";
+import trash_icon from "../../../assets/icons/trash.svg";
+import gear_icon from "../../../assets/icons/gear.svg";
 
 const ActivitiesHistory = () => {
-  const activities = queryCache.getQueryData("activities")
-  return (
-    <div>
-      <div>
-        {activities.map((el) => (
-          <details key={el._id}>
-            <summary>{time({ type: "MAKE_LONG_DATE", date: el.date })}</summary>
-            <span>type: {el.type}</span>
-            <span>length: {el.length}</span>
-            <span>pulse: {el.pulse}</span>
-          </details>
-        ))}
-      </div>
-    </div>
-  )
-}
+  const [active, setActive] = useState(false);
+  const activities = queryCache.getQueryData("activities");
 
-export default ActivitiesHistory
+  const handleDetails = (e) => {
+    active ? setActive(false) : setActive(true);
+    console.log(active);
+  };
+
+  return (
+    <div className={style.container}>
+      {activities.map((el) => (
+        <details className={style.details} key={el._id} onToggle={() => handleDetails()}>
+          <summary className={style.summary}>{time({ type: "MAKE_LONG_DATE", date: el.date })}</summary>
+          <span className={style.summaryDetail}>type: {el.type}</span>
+          <span className={style.summaryDetail}>length: {el.length}</span>
+          <span className={style.summaryDetail}>pulse: {el.pulse}</span>
+          <div className={style.buttons}>
+            <Icon src={gear_icon} className={style.btn} />
+            <Icon src={trash_icon} className={style.btn} />
+          </div>
+        </details>
+      ))}
+    </div>
+  );
+};
+
+export default ActivitiesHistory;
