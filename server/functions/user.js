@@ -1,7 +1,6 @@
 const getConnection = require("../db/index")
 const UserModel = require("../db/models/user")
 const FunctionConstructor = require("../helpers/FunctionConstructor")
-const fetchh = require("node-fetch")
 
 exports.handler = async (event, context, callback) => {
   const { clientContext: user } = context
@@ -30,6 +29,8 @@ exports.handler = async (event, context, callback) => {
       case "GET":
         try {
           const res = await User.get()
+
+          console.log(res, "RESPKURWAPONSE ----------------------------------")
           callback(null, {
             statusCode: 200,
             body: JSON.stringify({ response: res, message: "OK" }),

@@ -1,7 +1,6 @@
 const getConnection = require("../db/index")
 const ActivityModel = require("../db/models/activity")
 const FunctionConstructor = require("../helpers/FunctionConstructor")
-const fetchh = require("node-fetch")
 
 exports.handler = async (event, context, callback) => {
   const { clientContext: user } = context
