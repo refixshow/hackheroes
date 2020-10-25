@@ -3,8 +3,28 @@
   justify-content: space-between;
   padding: var(--padding-narrow) 2rem;
   background-color: var(--base-color);
+  position: relative;
+}
 
-  & > div {
-    display: flex;
-  }
+.buttons {
+  display: flex;
+}
+
+.btn {
+  background: transparent;
+  margin: 0.8em;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+.pageTitle {
+  position: relative;
+  top: 50%;
+  left: 40px;
+  font-size: 2em;
+  color: var(--background);
+  transform: translateY(30%);
 }

@@ -41,9 +41,9 @@ const AddBMI = () => {
   return (
     <div className={style.container}>
       <form onSubmit={handleSubmit} className={style.form}>
-        <input type='number' required onChange={handleSys_pressure} />
-        <input type='number' required onChange={handleDias_pressure} />
-        <input type='submit' className={style.btn} value='save' />
+        <input type='number' required onChange={handleSys_pressure} placeholder='Ciśnienie skurczowe' />
+        <input type='number' required onChange={handleDias_pressure} placeholder='Ciśnienie rozkurczowe' />
+        <input type='submit' className={style.btn} value='save' placeholder='Twój puls [/min]' />
       </form>
     </div>
   );
