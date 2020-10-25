@@ -2,16 +2,15 @@ import { useMutation, queryCache, useQuery } from "react-query"
 import axios from "axios"
 
 export default function ({ type, payload }) {
+  const origin = window.location.origin
+
   switch (type) {
     case "GET":
       return useQuery(payload.queryKey, () =>
         axios
-          .get(
-            `http://localhost:8888/.netlify/functions/${payload.endPointName}`,
-            {
-              params: payload.params,
-            }
-          )
+          .get(`${origin}/.netlify/functions/${payload.endPointName}`, {
+            params: payload.params,
+          })
           .then((res) => res.data.response)
       )
     case "UPDATE":
@@ -19,7 +18,7 @@ export default function ({ type, payload }) {
         (values) =>
           axios
             .patch(
-              `http://localhost:8888/.netlify/functions/${payload.endPointName}`,
+              `${origin}/.netlify/functions/${payload.endPointName}`,
               values
             )
             .then((res) => res.data),
@@ -34,7 +33,7 @@ export default function ({ type, payload }) {
         (values) =>
           axios
             .post(
-              `http://localhost:8888/.netlify/functions/${payload.endPointName}`,
+              `${origin}/.netlify/functions/${payload.endPointName}`,
               values
             )
             .then((res) => res.data),
@@ -61,12 +60,9 @@ export default function ({ type, payload }) {
       return useMutation(
         (values) =>
           axios
-            .delete(
-              `http://localhost:8888/.netlify/functions/${payload.endPointName}`,
-              {
-                params: values,
-              }
-            )
+            .delete(`${origin}/.netlify/functions/${payload.endPointName}`, {
+              params: values,
+            })
             .then((res) => res.data),
         {
           onSettled: () => {
