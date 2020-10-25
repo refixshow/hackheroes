@@ -8,18 +8,12 @@ import trash_icon from "../../../assets/icons/trash.svg";
 import gear_icon from "../../../assets/icons/gear.svg";
 
 const ActivitiesHistory = () => {
-  const [active, setActive] = useState(false);
   const activities = queryCache.getQueryData("activities");
-
-  const handleDetails = (e) => {
-    active ? setActive(false) : setActive(true);
-    console.log(active);
-  };
 
   return (
     <div className={style.container}>
       {activities.map((el) => (
-        <details className={style.details} key={el._id} onToggle={() => handleDetails()}>
+        <details className={style.details} key={el._id}>
           <summary className={style.summary}>{time({ type: "MAKE_LONG_DATE", date: el.date })}</summary>
           <span className={style.summaryDetail}>type: {el.type}</span>
           <span className={style.summaryDetail}>length: {el.length}</span>
