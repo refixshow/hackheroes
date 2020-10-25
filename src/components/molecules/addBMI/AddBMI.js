@@ -46,13 +46,13 @@ const AddBMI = () => {
         <input
           type="number"
           required
-          onChange={handleHeightChange}
+          onChange={handleSys_pressure}
           placeholder="Waga [kg]"
         />
         <input
           type="number"
           required
-          onChange={handleWeightChange}
+          onChange={handleDias_pressure}
           placeholder="Wzrost [cm]"
         />
         <input type="submit" className={style.btn} value="save" />
