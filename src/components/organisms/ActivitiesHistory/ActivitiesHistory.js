@@ -14,7 +14,7 @@ const ActivitiesHistory = () => {
     <div className={style.container}>
       {activities.map((el) => (
         <details className={style.details} key={el._id}>
-          <summary className={style.summary}>{time({ type: "MAKE_LONG_DATE", date: el.date })}</summary>
+          <summary>{time({ type: "MAKE_LONG_DATE", date: el.date })}</summary>
           <span className={style.summaryDetail}>type: {el.type}</span>
           <span className={style.summaryDetail}>length: {el.length}</span>
           <span className={style.summaryDetail}>pulse: {el.pulse}</span>

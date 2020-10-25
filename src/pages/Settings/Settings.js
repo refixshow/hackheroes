@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./Settings.module.scss";
-import Icon from "../../components/atoms/icon/Icon";
 import IconWithParagraph from "../../components/atoms/IconWithParagraph/IconWithParagraph";
 import user_icon from "../../assets/icons/account.svg";
 import chart_icon from "../../assets/icons/chart.svg";
