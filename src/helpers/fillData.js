@@ -28,7 +28,6 @@ export default function fillData({ type, data }) {
       ]
 
     case "bmi":
-      console.log(data)
       return [
         {
           label: "Height",

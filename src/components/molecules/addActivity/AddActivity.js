@@ -50,7 +50,7 @@ const AddActivity = () => {
   return (
     <div className={style.container}>
       <form onSubmit={handleSubmit} className={style.form}>
-        <label className={style.label} for="select">
+        <label className={style.label} htmlFor="select">
           Rodzaj aktywności: &nbsp;
         </label>
         <select

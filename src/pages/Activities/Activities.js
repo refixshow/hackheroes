@@ -10,7 +10,6 @@ const Activities = () => {
     chart: true,
     history: false,
     add: false,
-    delete: false,
     update: false,
   })
 
@@ -21,8 +20,11 @@ const Activities = () => {
         {active.chart && (
           <ReactChart queryKey="activities" endPointName="activity" />
         )}
-        {active.history && <ActivitiesHistory />}
+        {active.history && (
+          <ActivitiesHistory active={active} setActive={setActive} />
+        )}
         {active.add && <AddActivity />}
+        {active.update && "update"}
       </div>
     </main>
   )
