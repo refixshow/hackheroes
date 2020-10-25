@@ -30,10 +30,10 @@ exports.handler = async (event, context, callback) => {
         try {
           const res = await User.get()
 
-          callback(null, {
+          return {
             statusCode: 200,
             body: "helo?",
-          })
+          }
         } catch (err) {
           callback(null, {
             statusCode: 404,
