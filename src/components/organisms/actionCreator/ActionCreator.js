@@ -1,7 +1,9 @@
 import React from "react"
 import style from "./ActionCreator.module.scss"
 
-const ActionCreator = () => {
+import { queryCache } from "react-query"
+
+const ActionCreator = ({ type, payload }) => {
   return (
     <header className={style.wrapper}>
       <span>title</span>

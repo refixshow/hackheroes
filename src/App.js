@@ -17,7 +17,6 @@ import {
   Settings,
 } from "./pages"
 import { Nav } from "./components/molecules"
-import ActionCreator from "./components/organisms/actionCreator/ActionCreator"
 
 import "react-netlify-identity-widget/styles.css"
 import "@reach/tabs/styles.css"
@@ -29,7 +28,6 @@ const App = () => {
       {/* <ReactQueryDevtools initialIsOpen /> */}
       <IdentityModalContextProvider>
         <Router>
-          <ActionCreator />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/user" component={User} />

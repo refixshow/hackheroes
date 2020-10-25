@@ -3,9 +3,5 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: max-content 1fr max-content;
-
-  & main {
-    grid-row: 2;
-  }
+  grid-template-rows: 1fr max-content;
 }
