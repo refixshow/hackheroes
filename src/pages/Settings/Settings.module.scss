@@ -1,0 +1,52 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.userPanel {
+  position: relative;
+  width: 100%;
+  height: 15em;
+  background-color: var(--base-color);
+}
+
+.userMain {
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  transform: translateY(-50%);
+}
+
+.username {
+  text-align: center;
+  color: var(--background);
+  font-size: 1.4em;
+  font-weight: 300;
+}
+
+.userDesc {
+  color: var(--background);
+  display: inline;
+}
+
+.icon {
+  width: 76px;
+  height: 76px;
+}
+
+.iconSm {
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+  display: inline-block;
+  margin-right: 0.4em;
+}
+
+.userSub {
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  font-size: 1.4em;
+  font-weight: 300;
+}

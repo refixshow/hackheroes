@@ -29,7 +29,7 @@ const Nav = () => {
       <br></br>
       {/* <NavLink to='/covid19'>Covid</NavLink>
       <br></br> */}
-      <NavLink to='/user' icon={settings_icon}>
+      <NavLink to='/settings' icon={settings_icon}>
         user
       </NavLink>
     </nav>
