@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Settings.module.scss";
 import Icon from "../../components/atoms/icon/Icon";
+import IconWithParagraph from "../../components/atoms/IconWithParagraph/IconWithParagraph";
 import user_icon from "../../assets/icons/account.svg";
 import chart_icon from "../../assets/icons/chart.svg";
 import dumbbell_icon from "../../assets/icons/dumbbell.svg";
@@ -14,23 +15,11 @@ const Settings = () => {
   return (
     <div className={style.container}>
       <div className={style.userPanel}>
-        <div className={style.userMain}>
-          <Icon src={user_icon} className={style.icon} />
-          <p className={style.username}>Antoni</p>
-        </div>
+        <IconWithParagraph divClass={style.userMain} icon={user_icon} iconStyle={style.icon} className={style.username} content={"Antoni"} />
         <div className={style.userSub}>
-          <div>
-            <Icon src={date_icon} className={style.iconSm} />
-            <p className={style.userDesc}>Wiek: {age}</p>
-          </div>
-          <div>
-            <Icon src={chart_icon} className={style.iconSm} />
-            <p className={style.userDesc}>Pomiary: {measurements}</p>
-          </div>
-          <div>
-            <Icon src={dumbbell_icon} className={style.iconSm} />
-            <p className={style.userDesc}>Aktywności: {activities}</p>
-          </div>
+          <IconWithParagraph icon={date_icon} iconStyle={style.iconSm} className={style.userDesc} content={"Wiek: "} value={age} />
+          <IconWithParagraph icon={chart_icon} iconStyle={style.iconSm} className={style.userDesc} content={"Pomiary: "} value={measurements} />
+          <IconWithParagraph icon={dumbbell_icon} iconStyle={style.iconSm} className={style.userDesc} content={"Aktywności: "} value={activities} />
         </div>
       </div>
     </div>
