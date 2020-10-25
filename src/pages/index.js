@@ -1,4 +1,4 @@
-export { default as Home } from "./home/Home"
+export { default as Home } from "./Home/Home"
 export { default as Error } from "./Error"
 export { default as Activities } from "./Activities"
 export { default as BMI } from "./BMI"
