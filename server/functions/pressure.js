@@ -13,10 +13,10 @@ exports.handler = async (event, context, callback) => {
 
     if (Object.keys(params).length === 0) {
       if (!body) {
-        callback(null, {
+        return {
           statusCode: 400,
           body: "Bad request",
-        })
+        }
       } else {
         parsedBody = JSON.parse(body)
       }
@@ -39,7 +39,7 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify({ response: null, message: "Not found" }),
           }
         }
-        break
+
       case "POST":
         try {
           const res = await Pressure.post()
@@ -53,7 +53,7 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify({ response: null, message: "Not found" }),
           }
         }
-        break
+
       case "PATCH":
         try {
           const res = await Pressure.patch()
@@ -67,7 +67,7 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify({ response: null, message: "Not found" }),
           }
         }
-        break
+
       case "DELETE":
         try {
           const res = await Pressure.delete()
@@ -81,7 +81,7 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify({ response: null, message: "Not found" }),
           }
         }
-        break
+
       default:
         return {
           statusCode: 400,

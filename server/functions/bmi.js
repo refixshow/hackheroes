@@ -13,10 +13,10 @@ exports.handler = async (event, context, callback) => {
 
     if (Object.keys(params).length === 0) {
       if (!body) {
-        callback(null, {
+        return {
           statusCode: 400,
           body: "Bad request",
-        })
+        }
       } else {
         parsedBody = JSON.parse(body)
       }

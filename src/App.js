@@ -1,5 +1,7 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { queryCache } from "react-query"
+import DevTools from "react-query-devtools"
 import IdentityModalContextProvider from "./context/IdentityModalContextProvider"
 import PrivateRoute from "./components/PrivateRoute"
 import AppTemplate from "./components/templates/appTemplate/AppTemplate"
@@ -18,14 +20,20 @@ import "react-netlify-identity-widget/styles.css"
 import "@reach/tabs/styles.css"
 import "./App.module.scss"
 
+import Test from "./pages/Test"
+
 const App = () => {
+  console.log(queryCache.getQueryData("activities"))
+
   return (
     <AppTemplate>
+      <DevTools />
       <IdentityModalContextProvider>
         <Router>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/user" component={User} />
+            <Route path="/test" component={Test} />
+            <PrivateRoute path="/user" component={User} />
             <PrivateRoute path="/activities" component={Activities} />
             <PrivateRoute path="/pressure" component={Pressure} />
             <PrivateRoute path="/bmi" component={BMI} />

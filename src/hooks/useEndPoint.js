@@ -11,7 +11,9 @@ export default function ({ type, payload }) {
           .get(`${origin}/.netlify/functions/${payload.endPointName}`, {
             params: payload.params,
             headers: {
-              Authorization: `Bearer ${payload.user.token.access_token}`,
+              Authorization: `Bearer ${console.log(
+                payload.user.token.access_token
+              )}`,
             },
           })
           .then((res) => res.data.response)
