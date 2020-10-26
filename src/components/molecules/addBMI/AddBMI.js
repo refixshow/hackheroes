@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useMemo } from "react"
+import { queryCache } from "react-query"
 import { Redirect } from "react-router-dom"
 import { useIdentityContext } from "react-netlify-identity-widget"
 import useEndPoint from "../../../hooks/useEndPoint"
@@ -6,6 +7,7 @@ import timeSetter from "../../../helpers/time"
 import style from "./AddBMI.module.scss"
 
 const AddBMI = ({ setActive }) => {
+  const userData = queryCache.getQueryData("user")
   const { user } = useIdentityContext()
   const [weight, setWeight] = useState(0)
   const [height, setHeight] = useState(0)
@@ -25,14 +27,14 @@ const AddBMI = ({ setActive }) => {
     (e) => {
       e.preventDefault()
       addBMI({
-        user_id: "1",
+        user_id: userData[0]._id,
         weight,
         height,
         BMI: Math.round(weight / Math.pow(height, 2)),
         date: timeSetter({ type: "MAKE_ISO_DATE", date: longDate }),
       })
     },
-    [addBMI, longDate, weight, height]
+    [addBMI, longDate, weight, height, userData]
   )
 
   const handleWeight = useCallback((e) => {

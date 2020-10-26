@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useMemo } from "react"
+import { queryCache } from "react-query"
 import { Redirect } from "react-router-dom"
 import { useIdentityContext } from "react-netlify-identity-widget"
 import useEndPoint from "../../../hooks/useEndPoint"
@@ -6,6 +7,7 @@ import timeSetter from "../../../helpers/time"
 import style from "./AddPressure.module.scss"
 
 const AddPressure = ({ setActive }) => {
+  const userData = queryCache.getQueryData("user")
   const { user } = useIdentityContext()
   const [sys_pressure, setSys_pressure] = useState(0)
   const [dias_pressure, setDias_pressure] = useState(0)
@@ -26,14 +28,14 @@ const AddPressure = ({ setActive }) => {
     (e) => {
       e.preventDefault()
       addPressure({
-        user_id: "1",
+        user_id: userData[0]._id,
         sys_pressure,
         dias_pressure,
         pulse,
         date: timeSetter({ type: "MAKE_ISO_DATE", date: longDate }),
       })
     },
-    [addPressure, longDate, sys_pressure, dias_pressure, pulse]
+    [addPressure, longDate, sys_pressure, dias_pressure, pulse, userData]
   )
 
   const handleSys_pressure = useCallback((e) => {

@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useMemo } from "react"
+import { queryCache } from "react-query"
 import { Redirect } from "react-router-dom"
 import { useIdentityContext } from "react-netlify-identity-widget"
 import useEndPoint from "../../../hooks/useEndPoint"
@@ -6,6 +7,7 @@ import timeSetter from "../../../helpers/time"
 import style from "./AddActivity.module.scss"
 
 const AddActivity = ({ setActive }) => {
+  const userData = queryCache.getQueryData("user")
   const { user } = useIdentityContext()
   const [type, setType] = useState("running")
   const [length, setLength] = useState(0)
@@ -27,7 +29,7 @@ const AddActivity = ({ setActive }) => {
     (e) => {
       e.preventDefault()
       addActivity({
-        user_id: "1",
+        user_id: userData[0]._id,
         type,
         length,
         time,
@@ -35,7 +37,7 @@ const AddActivity = ({ setActive }) => {
         date: timeSetter({ type: "MAKE_ISO_DATE", date: longDate }),
       })
     },
-    [addActivity, longDate, type, length, time, pulse]
+    [addActivity, longDate, type, length, time, pulse, userData]
   )
 
   const handleTypeChange = useCallback((e) => {
