@@ -7,10 +7,10 @@ const Test = () => {
 
   const fetchj = useCallback(async () => {
     return await axios.get(
-      `${window.location.origin}/.netlify/functions/test`,
+      `https://hackheroes.netlify.app/.netlify/functions/test`,
       {
         headers: {
-          Authorization: `Bearer ${user.token.access_token}`,
+          Authorization: `bearer ${user.token.access_token}`,
         },
       }
     )

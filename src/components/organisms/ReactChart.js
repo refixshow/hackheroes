@@ -9,6 +9,8 @@ const ReactChart = ({ queryKey, endPointName }) => {
   const identity = useIdentityContext()
   const user = queryCache.getQueryData("user")
 
+  console.log("user-----", user)
+
   const { isLoading, isError, data, error, isSuccess } = useEndPoint({
     type: "GET",
     payload: {
