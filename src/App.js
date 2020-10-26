@@ -1,7 +1,6 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { queryCache } from "react-query"
-import DevTools from "react-query-devtools"
 import IdentityModalContextProvider from "./context/IdentityModalContextProvider"
 import PrivateRoute from "./components/PrivateRoute"
 import AppTemplate from "./components/templates/appTemplate/AppTemplate"
@@ -27,7 +26,6 @@ const App = () => {
 
   return (
     <AppTemplate>
-      <DevTools />
       <IdentityModalContextProvider>
         <Router>
           <Switch>
