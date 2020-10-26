@@ -8,7 +8,8 @@ import { queryCache } from "react-query"
 
 export const IdentityModalContext = createContext()
 
-const url = window.location.origin
+// const url = window.location.origin
+const url = "https://hackheroes.netlify.app"
 
 const IdentityModalContextProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false)
