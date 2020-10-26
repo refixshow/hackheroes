@@ -4,7 +4,7 @@ const FunctionConstructor = require("../helpers/FunctionConstructor")
 
 exports.handler = async (event, context) => {
   const { clientContext: user } = context
-  console.log("user---------------------", user)
+
   if (true) {
     const { httpMethod, body } = event
     const params = event.queryStringParameters
