@@ -15,10 +15,6 @@ const Settings = () => {
   const userData = queryCache.getQueryData("user")
   const { user } = useIdentityContext()
 
-  console.log(user)
-
-  let age = 45
-
   return (
     <div className={style.container}>
       <div className={style.userPanel}>
@@ -35,7 +31,12 @@ const Settings = () => {
             iconStyle={style.iconSm}
             className={style.userDesc}
             content={"Wiek: "}
-            value={age}
+            value={
+              userData
+                ? moment().year() -
+                  moment(userData[0].birth_date).startOf("year").year()
+                : "Nie znany"
+            }
           />
           <IconWithParagraph
             icon={chart_icon}
