@@ -2,7 +2,7 @@ const getConnection = require("../db/index")
 const UserModel = require("../db/models/user")
 const FunctionConstructor = require("../helpers/FunctionConstructor")
 
-exports.handler = async (event, context, callback) => {
+exports.handler = async (event, context) => {
   const { clientContext: user } = context
   console.log("user---------------------", user)
   if (true) {
@@ -39,7 +39,7 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify({ response: null, message: "Not found" }),
           }
         }
-        break
+
       case "POST":
         try {
           const res = await User.post()
@@ -53,7 +53,7 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify({ response: null, message: "Not found" }),
           }
         }
-        break
+
       case "PATCH":
         try {
           const res = await User.patch()
@@ -67,7 +67,7 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify({ response: null, message: "Not found" }),
           }
         }
-        break
+
       case "DELETE":
         try {
           const res = await User.delete()
@@ -81,7 +81,6 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify({ response: err, message: "Not found" }),
           }
         }
-        break
       default:
         return {
           statusCode: 400,
