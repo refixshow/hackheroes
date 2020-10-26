@@ -1,9 +1,10 @@
 import React, { useCallback, useState, useMemo } from "react"
+import { Redirect } from "react-router-dom"
 import useEndPoint from "../../../hooks/useEndPoint"
 import timeSetter from "../../../helpers/time"
 import style from "./AddActivity.module.scss"
 
-const AddActivity = () => {
+const AddActivity = ({ setActive }) => {
   const [type, setType] = useState("running")
   const [length, setLength] = useState(0)
   const [time, setTime] = useState(0)
@@ -11,7 +12,7 @@ const AddActivity = () => {
 
   const longDate = useMemo(() => timeSetter({ type: "GET_LONG_DATE" }), [])
 
-  const [addActivity] = useEndPoint({
+  const [addActivity, addActivityInfo] = useEndPoint({
     type: "POST",
     payload: {
       queryKey: "activities",
@@ -46,6 +47,20 @@ const AddActivity = () => {
   const handlePulseChange = useCallback((e) => {
     setPulse(e.target.value)
   }, [])
+
+  if (addActivityInfo.isSuccess) {
+    setActive({
+      chart: true,
+      history: false,
+      add: false,
+      update: {
+        isUpdating: false,
+        object: "",
+      },
+    })
+
+    return <Redirect to="pressure" />
+  }
 
   return (
     <div className={style.container}>

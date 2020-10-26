@@ -1,13 +1,25 @@
-import React from "react";
-import { queryCache } from "react-query";
-import time from "../../../helpers/time";
-import style from "./BMIHistory.module.scss";
-import Icon from "../../atoms/icon/Icon";
-import trash_icon from "../../../assets/icons/trash.svg";
-import gear_icon from "../../../assets/icons/gear.svg";
+import React from "react"
+import { queryCache } from "react-query"
+import time from "../../../helpers/time"
+import style from "./BMIHistory.module.scss"
+import Icon from "../../atoms/icon/Icon"
+import trash_icon from "../../../assets/icons/trash.svg"
+import gear_icon from "../../../assets/icons/gear.svg"
+import { Redirect } from "react-router-dom"
+import useEndPoint from "../../../hooks/useEndPoint"
 
-const BMIHistory = () => {
-  const bmi = queryCache.getQueryData("bmi");
+const BMIHistory = ({ setActive }) => {
+  const bmi = queryCache.getQueryData("bmi")
+
+  const [deleteBMI, deleteBMIInfo] = useEndPoint({
+    type: "DELETE",
+    payload: { endPointName: "bmi", queryKey: "bmi" },
+  })
+
+  if (deleteBMIInfo.isSuccess) {
+    return <Redirect to="bmi" />
+  }
+
   return (
     <div className={style.container}>
       {bmi.map((el) => (
@@ -17,13 +29,39 @@ const BMIHistory = () => {
           <span className={style.summaryDetail}>height: {el.height}</span>
           <span className={style.summaryDetail}>bmi: {el.bmi}</span>
           <div className={style.buttons}>
-            <Icon src={gear_icon} className={style.btn} />
-            <Icon src={trash_icon} className={style.btn} />
+            <button
+              onClick={() => {
+                setActive({
+                  chart: false,
+                  history: false,
+                  add: false,
+                  update: {
+                    isUpdating: true,
+                    object: el,
+                  },
+                })
+              }}
+            >
+              <Icon src={gear_icon} className={style.btn} />
+            </button>
+            <button
+              onClick={() => {
+                deleteBMI({ object_id: el._id })
+                setActive({
+                  chart: true,
+                  history: false,
+                  add: false,
+                  update: false,
+                })
+              }}
+            >
+              <Icon src={trash_icon} className={style.btn} />
+            </button>
           </div>
         </details>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default BMIHistory;
+export default BMIHistory

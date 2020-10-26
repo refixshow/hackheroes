@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import ReactChart from "../../components/organisms/ReactChart"
-import AddActivity from "../../components/molecules/addActivity/AddActivity"
+import AddActivities from "../../components/molecules/addActivities/AddActivities"
+import UpdateActivities from "../../components/molecules/updateActivities/UpdateActivities"
 import ActionCreator from "../../components/organisms/actionCreator/ActionCreator"
 import ActivitiesHistory from "../../components/organisms/ActivitiesHistory/ActivitiesHistory"
 import styles from "./Activities.module.scss"
@@ -10,7 +11,10 @@ const Activities = () => {
     chart: true,
     history: false,
     add: false,
-    update: false,
+    update: {
+      isUpdating: false,
+      object: "",
+    },
   })
 
   return (
@@ -20,11 +24,14 @@ const Activities = () => {
         {active.chart && (
           <ReactChart queryKey="activities" endPointName="activity" />
         )}
-        {active.history && (
-          <ActivitiesHistory active={active} setActive={setActive} />
+        {active.history && <ActivitiesHistory setActive={setActive} />}
+        {active.add && <AddActivities setActive={setActive} />}
+        {active.update.isUpdating && (
+          <UpdateActivities
+            setActive={setActive}
+            prevActivity={active.update.object}
+          />
         )}
-        {active.add && <AddActivity />}
-        {active.update && "update"}
       </div>
     </main>
   )

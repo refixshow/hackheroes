@@ -1,12 +1,12 @@
-import React, { useCallback } from "react"
+import React from "react"
 import { queryCache } from "react-query"
+import { Redirect } from "react-router-dom"
 import time from "../../../helpers/time"
 import style from "./ActivitiesHistory.module.scss"
 import Icon from "../../atoms/icon/Icon"
 import trash_icon from "../../../assets/icons/trash.svg"
 import gear_icon from "../../../assets/icons/gear.svg"
 import useEndPoint from "../../../hooks/useEndPoint"
-import { Redirect } from "react-router-dom"
 
 const ActivitiesHistory = ({ setActive }) => {
   const activities = queryCache.getQueryData("activities")
@@ -15,15 +15,6 @@ const ActivitiesHistory = ({ setActive }) => {
     type: "DELETE",
     payload: { endPointName: "activity", queryKey: "activities" },
   })
-
-  const handleUpdateChange = useCallback(() => {
-    setActive({
-      chart: false,
-      history: false,
-      add: false,
-      update: true,
-    })
-  }, [setActive])
 
   if (deleteActivityInfo.isSuccess) {
     return <Redirect to="activities" />
@@ -37,8 +28,21 @@ const ActivitiesHistory = ({ setActive }) => {
           <span className={style.summaryDetail}>type: {el.type}</span>
           <span className={style.summaryDetail}>length: {el.length}</span>
           <span className={style.summaryDetail}>pulse: {el.pulse}</span>
+          <span className={style.summaryDetail}>time: {el.time}</span>
           <div className={style.buttons}>
-            <button onClick={handleUpdateChange}>
+            <button
+              onClick={() => {
+                setActive({
+                  chart: false,
+                  history: false,
+                  add: false,
+                  update: {
+                    isUpdating: true,
+                    object: el,
+                  },
+                })
+              }}
+            >
               <Icon src={gear_icon} className={style.btn} />
             </button>
             <button

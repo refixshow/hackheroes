@@ -1,18 +1,15 @@
-import React, { useCallback, useState, useMemo } from "react"
+import React, { useCallback, useState } from "react"
 import { Redirect } from "react-router-dom"
 import useEndPoint from "../../../hooks/useEndPoint"
-import timeSetter from "../../../helpers/time"
-import style from "./AddPressure.module.scss"
+import style from "./UpdatePressure.module.scss"
 
-const AddPressure = ({ setActive }) => {
-  const [sys_pressure, setSys_pressure] = useState(0)
-  const [dias_pressure, setDias_pressure] = useState(0)
-  const [pulse, setPulse] = useState(0)
+const UpdatePressure = ({ prevActivity, setActive }) => {
+  const [sys_pressure, setSys_pressure] = useState(prevActivity.sys_pressure)
+  const [dias_pressure, setDias_pressure] = useState(prevActivity.dias_pressure)
+  const [pulse, setPulse] = useState(prevActivity.pulse)
 
-  const longDate = useMemo(() => timeSetter({ type: "GET_LONG_DATE" }), [])
-
-  const [addPressure, addPressureInfo] = useEndPoint({
-    type: "POST",
+  const [updatePressure, updatePressureInfo] = useEndPoint({
+    type: "PATCH",
     payload: {
       queryKey: "pressure",
       endPointName: "pressure",
@@ -22,15 +19,24 @@ const AddPressure = ({ setActive }) => {
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault()
-      addPressure({
-        user_id: "1",
+      updatePressure({
+        object_id: prevActivity._id,
+        user_id: prevActivity.user_id,
         sys_pressure,
         dias_pressure,
         pulse,
-        date: timeSetter({ type: "MAKE_ISO_DATE", date: longDate }),
+        date: prevActivity.date,
       })
     },
-    [addPressure, longDate, sys_pressure, dias_pressure, pulse]
+    [
+      updatePressure,
+      sys_pressure,
+      dias_pressure,
+      pulse,
+      prevActivity._id,
+      prevActivity.user_id,
+      prevActivity.date,
+    ]
   )
 
   const handleSys_pressure = useCallback((e) => {
@@ -42,8 +48,7 @@ const AddPressure = ({ setActive }) => {
   const handlePulseChange = useCallback((e) => {
     setPulse(e.target.value)
   }, [])
-
-  if (addPressureInfo.isSuccess) {
+  if (updatePressureInfo.isSuccess) {
     setActive({
       chart: true,
       history: false,
@@ -54,7 +59,7 @@ const AddPressure = ({ setActive }) => {
       },
     })
 
-    return <Redirect to="pressure" />
+    return <Redirect to="activities" />
   }
 
   return (
@@ -63,18 +68,21 @@ const AddPressure = ({ setActive }) => {
         <input
           type="number"
           required
+          value={sys_pressure}
           onChange={handleSys_pressure}
           placeholder="Ciśnienie skurczowe"
         />
         <input
           type="number"
           required
+          value={dias_pressure}
           onChange={handleDias_pressure}
           placeholder="Ciśnienie rozkurczowe"
         />
         <input
           type="number"
           required
+          value={pulse}
           onChange={handlePulseChange}
           placeholder="Twój puls [/min]"
         />
@@ -84,4 +92,4 @@ const AddPressure = ({ setActive }) => {
   )
 }
 
-export default AddPressure
+export default UpdatePressure

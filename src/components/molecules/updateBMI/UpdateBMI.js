@@ -1,17 +1,14 @@
-import React, { useCallback, useState, useMemo } from "react"
+import React, { useCallback, useState } from "react"
 import { Redirect } from "react-router-dom"
 import useEndPoint from "../../../hooks/useEndPoint"
-import timeSetter from "../../../helpers/time"
-import style from "./AddBMI.module.scss"
+import style from "./UpdateBMI.module.scss"
 
-const AddBMI = ({ setActive }) => {
-  const [weight, setWeight] = useState(0)
-  const [height, setHeight] = useState(0)
+const UpdateBMI = ({ prevActivity, setActive }) => {
+  const [weight, setWeight] = useState(prevActivity.weight)
+  const [height, setHeight] = useState(prevActivity.height)
 
-  const longDate = useMemo(() => timeSetter({ type: "GET_LONG_DATE" }), [])
-
-  const [addBMI, addBMIInfo] = useEndPoint({
-    type: "POST",
+  const [updateBMI, updateBMIInfo] = useEndPoint({
+    type: "PATCH",
     payload: {
       queryKey: "bmi",
       endPointName: "bmi",
@@ -21,15 +18,22 @@ const AddBMI = ({ setActive }) => {
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault()
-      addBMI({
-        user_id: "1",
+      updateBMI({
+        object_id: prevActivity._id,
+        user_id: prevActivity.user_id,
         weight,
         height,
-        BMI: Math.round(weight / Math.pow(height, 2)),
-        date: timeSetter({ type: "MAKE_ISO_DATE", date: longDate }),
+        date: prevActivity.date,
       })
     },
-    [addBMI, longDate, weight, height]
+    [
+      prevActivity._id,
+      updateBMI,
+      weight,
+      height,
+      prevActivity.user_id,
+      prevActivity.date,
+    ]
   )
 
   const handleWeight = useCallback((e) => {
@@ -38,8 +42,7 @@ const AddBMI = ({ setActive }) => {
   const handleHeight = useCallback((e) => {
     setHeight(e.target.value)
   }, [])
-
-  if (addBMIInfo.isSuccess) {
+  if (updateBMIInfo.isSuccess) {
     setActive({
       chart: true,
       history: false,
@@ -59,12 +62,14 @@ const AddBMI = ({ setActive }) => {
         <input
           type="number"
           required
+          value={weight}
           onChange={handleWeight}
           placeholder="Waga [kg]"
         />
         <input
           type="number"
           required
+          value={height}
           onChange={handleHeight}
           placeholder="Wzrost [cm]"
         />
@@ -74,4 +79,4 @@ const AddBMI = ({ setActive }) => {
   )
 }
 
-export default AddBMI
+export default UpdateBMI

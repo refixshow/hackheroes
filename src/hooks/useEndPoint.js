@@ -13,7 +13,7 @@ export default function ({ type, payload }) {
           })
           .then((res) => res.data.response)
       )
-    case "UPDATE":
+    case "PATCH":
       return useMutation(
         (values) =>
           axios

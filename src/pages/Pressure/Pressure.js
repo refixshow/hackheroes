@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import ReactChart from "../../components/organisms/ReactChart"
 import AddPressure from "../../components/molecules/addPressure/AddPressure"
+import UpdatePressure from "../../components/molecules/updatePressure/UpdatePressure"
 import ActionCreator from "../../components/organisms/actionCreator/ActionCreator"
 import PressureHistory from "../../components/organisms/PressureHistory/PressureHistory"
 import style from "./Pressure.module.scss"
@@ -11,7 +12,10 @@ const Pressure = () => {
     history: false,
     add: false,
     delete: false,
-    update: false,
+    update: {
+      isUpdating: false,
+      object: "",
+    },
   })
 
   return (
@@ -21,8 +25,14 @@ const Pressure = () => {
         {active.chart && (
           <ReactChart queryKey="pressure" endPointName="pressure" />
         )}
-        {active.history && <PressureHistory />}
-        {active.add && <AddPressure />}
+        {active.history && <PressureHistory setActive={setActive} />}
+        {active.add && <AddPressure setActive={setActive} />}
+        {active.update.isUpdating && (
+          <UpdatePressure
+            setActive={setActive}
+            prevActivity={active.update.object}
+          />
+        )}
       </div>
     </main>
   )
