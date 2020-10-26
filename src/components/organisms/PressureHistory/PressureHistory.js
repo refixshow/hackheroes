@@ -1,6 +1,7 @@
 import React from "react"
 import { Redirect } from "react-router-dom"
 import { queryCache } from "react-query"
+import { useIdentityContext } from "react-netlify-identity-widget"
 import time from "../../../helpers/time"
 import Icon from "../../atoms/icon/Icon"
 import style from "./PressureHistory.module.scss"
@@ -9,11 +10,12 @@ import gear_icon from "../../../assets/icons/gear.svg"
 import useEndPoint from "../../../hooks/useEndPoint"
 
 const PressureHistory = ({ setActive }) => {
+  const { user } = useIdentityContext()
   const pressure = queryCache.getQueryData("pressure")
 
   const [deletePressure, deletePressureInfo] = useEndPoint({
     type: "DELETE",
-    payload: { endPointName: "pressure", queryKey: "pressure" },
+    payload: { endPointName: "pressure", queryKey: "pressure", user },
   })
 
   if (deletePressureInfo.isSuccess) {

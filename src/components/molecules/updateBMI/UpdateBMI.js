@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from "react"
 import { Redirect } from "react-router-dom"
+import { useIdentityContext } from "react-netlify-identity-widget"
 import useEndPoint from "../../../hooks/useEndPoint"
 import style from "./UpdateBMI.module.scss"
 
 const UpdateBMI = ({ prevActivity, setActive }) => {
+  const { user } = useIdentityContext()
   const [weight, setWeight] = useState(prevActivity.weight)
   const [height, setHeight] = useState(prevActivity.height)
 
@@ -12,6 +14,7 @@ const UpdateBMI = ({ prevActivity, setActive }) => {
     payload: {
       queryKey: "bmi",
       endPointName: "bmi",
+      user,
     },
   })
 

@@ -1,10 +1,12 @@
 import React, { useCallback, useState, useMemo } from "react"
 import { Redirect } from "react-router-dom"
+import { useIdentityContext } from "react-netlify-identity-widget"
 import useEndPoint from "../../../hooks/useEndPoint"
 import timeSetter from "../../../helpers/time"
 import style from "./AddActivity.module.scss"
 
 const AddActivity = ({ setActive }) => {
+  const { user } = useIdentityContext()
   const [type, setType] = useState("running")
   const [length, setLength] = useState(0)
   const [time, setTime] = useState(0)
@@ -17,6 +19,7 @@ const AddActivity = ({ setActive }) => {
     payload: {
       queryKey: "activities",
       endPointName: "activity",
+      user,
     },
   })
 

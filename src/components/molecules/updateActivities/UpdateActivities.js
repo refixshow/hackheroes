@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from "react"
+import { useIdentityContext } from "react-netlify-identity-widget"
 import { Redirect } from "react-router-dom"
 import useEndPoint from "../../../hooks/useEndPoint"
 import style from "./UpdateActivities.module.scss"
 
 const UpdateActivities = ({ prevActivity, setActive }) => {
+  const { user } = useIdentityContext()
   const [type, setType] = useState("running")
   const [length, setLength] = useState(prevActivity.length)
   const [time, setTime] = useState(prevActivity.time)
@@ -14,6 +16,7 @@ const UpdateActivities = ({ prevActivity, setActive }) => {
     payload: {
       queryKey: "activities",
       endPointName: "activity",
+      user,
     },
   })
 

@@ -1,19 +1,21 @@
 import React from "react"
 import { queryCache } from "react-query"
+import { Redirect } from "react-router-dom"
+import { useIdentityContext } from "react-netlify-identity-widget"
 import time from "../../../helpers/time"
 import style from "./BMIHistory.module.scss"
 import Icon from "../../atoms/icon/Icon"
 import trash_icon from "../../../assets/icons/trash.svg"
 import gear_icon from "../../../assets/icons/gear.svg"
-import { Redirect } from "react-router-dom"
 import useEndPoint from "../../../hooks/useEndPoint"
 
 const BMIHistory = ({ setActive }) => {
+  const { user } = useIdentityContext()
   const bmi = queryCache.getQueryData("bmi")
 
   const [deleteBMI, deleteBMIInfo] = useEndPoint({
     type: "DELETE",
-    payload: { endPointName: "bmi", queryKey: "bmi" },
+    payload: { endPointName: "bmi", queryKey: "bmi", user },
   })
 
   if (deleteBMIInfo.isSuccess) {

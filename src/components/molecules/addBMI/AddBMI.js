@@ -1,10 +1,12 @@
 import React, { useCallback, useState, useMemo } from "react"
 import { Redirect } from "react-router-dom"
+import { useIdentityContext } from "react-netlify-identity-widget"
 import useEndPoint from "../../../hooks/useEndPoint"
 import timeSetter from "../../../helpers/time"
 import style from "./AddBMI.module.scss"
 
 const AddBMI = ({ setActive }) => {
+  const { user } = useIdentityContext()
   const [weight, setWeight] = useState(0)
   const [height, setHeight] = useState(0)
 
@@ -15,6 +17,7 @@ const AddBMI = ({ setActive }) => {
     payload: {
       queryKey: "bmi",
       endPointName: "bmi",
+      user,
     },
   })
 

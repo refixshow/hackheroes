@@ -1,10 +1,12 @@
 import React, { useCallback, useState, useMemo } from "react"
 import { Redirect } from "react-router-dom"
+import { useIdentityContext } from "react-netlify-identity-widget"
 import useEndPoint from "../../../hooks/useEndPoint"
 import timeSetter from "../../../helpers/time"
 import style from "./AddPressure.module.scss"
 
 const AddPressure = ({ setActive }) => {
+  const { user } = useIdentityContext()
   const [sys_pressure, setSys_pressure] = useState(0)
   const [dias_pressure, setDias_pressure] = useState(0)
   const [pulse, setPulse] = useState(0)
@@ -16,6 +18,7 @@ const AddPressure = ({ setActive }) => {
     payload: {
       queryKey: "pressure",
       endPointName: "pressure",
+      user,
     },
   })
 

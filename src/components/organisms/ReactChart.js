@@ -1,19 +1,21 @@
 import React from "react"
-import useEndPoint from "../../hooks/useEndPoint"
-import fillData from "../../helpers/fillData"
 import { Chart } from "react-charts"
 import { queryCache } from "react-query"
+import { useIdentityContext } from "react-netlify-identity-widget"
+import useEndPoint from "../../hooks/useEndPoint"
+import fillData from "../../helpers/fillData"
 
 const ReactChart = ({ queryKey, endPointName }) => {
+  const identity = useIdentityContext()
   const user = queryCache.getQueryData("user")
 
-  //user[0].email
   const { isLoading, isError, data, error, isSuccess } = useEndPoint({
     type: "GET",
     payload: {
       queryKey,
       endPointName,
-      params: { user_id: "1" },
+      params: { user_id: user[0].email },
+      user: identity.user,
     },
   })
 

@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from "react"
 import { Redirect } from "react-router-dom"
+import { useIdentityContext } from "react-netlify-identity-widget"
 import useEndPoint from "../../../hooks/useEndPoint"
 import style from "./UpdatePressure.module.scss"
 
 const UpdatePressure = ({ prevActivity, setActive }) => {
+  const { user } = useIdentityContext()
   const [sys_pressure, setSys_pressure] = useState(prevActivity.sys_pressure)
   const [dias_pressure, setDias_pressure] = useState(prevActivity.dias_pressure)
   const [pulse, setPulse] = useState(prevActivity.pulse)
@@ -13,6 +15,7 @@ const UpdatePressure = ({ prevActivity, setActive }) => {
     payload: {
       queryKey: "pressure",
       endPointName: "pressure",
+      user,
     },
   })
 

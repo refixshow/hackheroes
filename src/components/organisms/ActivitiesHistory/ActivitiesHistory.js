@@ -1,6 +1,7 @@
 import React from "react"
 import { queryCache } from "react-query"
 import { Redirect } from "react-router-dom"
+import { useIdentityContext } from "react-netlify-identity-widget"
 import time from "../../../helpers/time"
 import style from "./ActivitiesHistory.module.scss"
 import Icon from "../../atoms/icon/Icon"
@@ -9,11 +10,12 @@ import gear_icon from "../../../assets/icons/gear.svg"
 import useEndPoint from "../../../hooks/useEndPoint"
 
 const ActivitiesHistory = ({ setActive }) => {
+  const { user } = useIdentityContext()
   const activities = queryCache.getQueryData("activities")
 
   const [deleteActivity, deleteActivityInfo] = useEndPoint({
     type: "DELETE",
-    payload: { endPointName: "activity", queryKey: "activities" },
+    payload: { endPointName: "activity", queryKey: "activities", user },
   })
 
   if (deleteActivityInfo.isSuccess) {

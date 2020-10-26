@@ -1,9 +1,6 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import { ReactQueryDevtools } from "react-query-devtools"
-
 import IdentityModalContextProvider from "./context/IdentityModalContextProvider"
-
 import PrivateRoute from "./components/PrivateRoute"
 import AppTemplate from "./components/templates/appTemplate/AppTemplate"
 import {
@@ -17,7 +14,6 @@ import {
   Settings,
 } from "./pages"
 import { Nav } from "./components/molecules"
-
 import "react-netlify-identity-widget/styles.css"
 import "@reach/tabs/styles.css"
 import "./App.module.scss"
@@ -25,7 +21,6 @@ import "./App.module.scss"
 const App = () => {
   return (
     <AppTemplate>
-      {/* <ReactQueryDevtools initialIsOpen /> */}
       <IdentityModalContextProvider>
         <Router>
           <Switch>

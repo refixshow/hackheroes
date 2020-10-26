@@ -1,15 +1,19 @@
 import { useMutation, queryCache, useQuery } from "react-query"
 import axios from "axios"
 
-export default function ({ type, payload }) {
-  const origin = window.location.origin
+const origin = window.location.origin
 
+export default function ({ type, payload }) {
   switch (type) {
     case "GET":
       return useQuery(payload.queryKey, () =>
         axios
           .get(`${origin}/.netlify/functions/${payload.endPointName}`, {
             params: payload.params,
+            headers: {
+              Authorization: `Bearer ${payload.user.token.access_token}`,
+              "Content-Type": "application/json",
+            },
           })
           .then((res) => res.data.response)
       )
@@ -19,7 +23,13 @@ export default function ({ type, payload }) {
           axios
             .patch(
               `${origin}/.netlify/functions/${payload.endPointName}`,
-              values
+              values,
+              {
+                headers: {
+                  Authorization: `Bearer ${payload.user.token.access_token}`,
+                  "Content-Type": "application/json",
+                },
+              }
             )
             .then((res) => res.data),
         {
@@ -34,7 +44,13 @@ export default function ({ type, payload }) {
           axios
             .post(
               `${origin}/.netlify/functions/${payload.endPointName}`,
-              values
+              values,
+              {
+                headers: {
+                  Authorization: `Bearer ${payload.user.token.access_token}`,
+                  "Content-Type": "application/json",
+                },
+              }
             )
             .then((res) => res.data),
         {
@@ -64,6 +80,10 @@ export default function ({ type, payload }) {
           axios
             .delete(`${origin}/.netlify/functions/${payload.endPointName}`, {
               params: values,
+              headers: {
+                Authorization: `Bearer ${payload.user.token.access_token}`,
+                "Content-Type": "application/json",
+              },
             })
             .then((res) => res.data),
         {
