@@ -30,7 +30,7 @@ const AddBMI = ({ setActive }) => {
         user_id: userData[0]._id,
         weight,
         height,
-        BMI: Math.round(weight / Math.pow(height, 2)),
+        bmi: Math.floor(weight / Math.pow(height, 2)),
         date: timeSetter({ type: "MAKE_ISO_DATE", date: longDate }),
       })
     },
