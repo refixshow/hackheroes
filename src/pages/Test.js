@@ -11,6 +11,7 @@ const Test = () => {
       {
         headers: {
           Authorization: `bearer ${user.token.access_token}`,
+          "Content-Type": "application/json",
         },
       }
     )

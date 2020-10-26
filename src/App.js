@@ -1,6 +1,5 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import { queryCache } from "react-query"
 import IdentityModalContextProvider from "./context/IdentityModalContextProvider"
 import PrivateRoute from "./components/PrivateRoute"
 import AppTemplate from "./components/templates/appTemplate/AppTemplate"
@@ -22,8 +21,6 @@ import "./App.module.scss"
 import Test from "./pages/Test"
 
 const App = () => {
-  console.log(queryCache.getQueryData("activities"))
-
   return (
     <AppTemplate>
       <IdentityModalContextProvider>

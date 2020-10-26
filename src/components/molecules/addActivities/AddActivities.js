@@ -64,7 +64,7 @@ const AddActivity = ({ setActive }) => {
       },
     })
 
-    return <Redirect to="pressure" />
+    return <Redirect to="activities" />
   }
 
   return (
