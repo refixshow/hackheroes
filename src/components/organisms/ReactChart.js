@@ -14,7 +14,7 @@ const ReactChart = ({ queryKey, endPointName }) => {
     payload: {
       queryKey,
       endPointName,
-      params: { user_id: user[0].email },
+      params: { user_id: user[0]._id },
       user: identity.user,
     },
   })
