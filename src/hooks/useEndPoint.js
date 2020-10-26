@@ -11,8 +11,7 @@ export default function ({ type, payload }) {
           .get(`${origin}/.netlify/functions/${payload.endPointName}`, {
             params: payload.params,
             headers: {
-              Authorization: `bearer ${payload.user.token.access_token}`,
-              "Content-Type": "application/json",
+              Authorization: `Bearer ${payload.user.token.access_token}`,
             },
           })
           .then((res) => res.data.response)
@@ -27,7 +26,6 @@ export default function ({ type, payload }) {
               {
                 headers: {
                   Authorization: `bearer ${payload.user.token.access_token}`,
-                  "Content-Type": "application/json",
                 },
               }
             )
@@ -48,7 +46,6 @@ export default function ({ type, payload }) {
               {
                 headers: {
                   Authorization: `bearer ${payload.user.token.access_token}`,
-                  "Content-Type": "application/json",
                 },
               }
             )
@@ -82,7 +79,6 @@ export default function ({ type, payload }) {
               params: values,
               headers: {
                 Authorization: `bearer ${payload.user.token.access_token}`,
-                "Content-Type": "application/json",
               },
             })
             .then((res) => res.data),
